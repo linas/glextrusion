@@ -6,8 +6,8 @@ This is an update to the very old GLE library, still available
 [here](https://www.linas.org/gle/).
 
 This update is a snapshot of the final version 3.1.0 of the codebase,
-and includes work from Dave Richards, adding new subsystems for 
-Windows users.
+and includes work from Dave Richards, providing a MSWindows-friendly
+C++ wrapper. Dave's work is in the [cgle-c++](cgle-c++) directory.
 
 GLE
 ---
