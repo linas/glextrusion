@@ -1,0 +1,558 @@
+# Makefile.in generated automatically by automake 1.4-p6 from Makefile.am
+
+# Copyright (C) 1994, 1995-8, 1999, 2001 Free Software Foundation, Inc.
+# This Makefile.in is free software; the Free Software Foundation
+# gives unlimited permission to copy and/or distribute it,
+# with or without modifications, as long as this notice is preserved.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY, to the extent permitted by law; without
+# even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
+
+
+SHELL = @SHELL@
+
+srcdir = @srcdir@
+top_srcdir = @top_srcdir@
+VPATH = @srcdir@
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+
+bindir = @bindir@
+sbindir = @sbindir@
+libexecdir = @libexecdir@
+datadir = @datadir@
+sysconfdir = @sysconfdir@
+sharedstatedir = @sharedstatedir@
+localstatedir = @localstatedir@
+libdir = @libdir@
+infodir = @infodir@
+mandir = @mandir@
+includedir = @includedir@
+oldincludedir = /usr/include
+
+DESTDIR =
+
+pkgdatadir = $(datadir)/@PACKAGE@
+pkglibdir = $(libdir)/@PACKAGE@
+pkgincludedir = $(includedir)/@PACKAGE@
+
+top_builddir = ..
+
+ACLOCAL = @ACLOCAL@
+AUTOCONF = @AUTOCONF@
+AUTOMAKE = @AUTOMAKE@
+AUTOHEADER = @AUTOHEADER@
+
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@ $(AM_INSTALL_PROGRAM_FLAGS)
+INSTALL_DATA = @INSTALL_DATA@
+INSTALL_SCRIPT = @INSTALL_SCRIPT@
+transform = @program_transform_name@
+
+NORMAL_INSTALL = :
+PRE_INSTALL = :
+POST_INSTALL = :
+NORMAL_UNINSTALL = :
+PRE_UNINSTALL = :
+POST_UNINSTALL = :
+host_alias = @host_alias@
+host_triplet = @host@
+AS = @AS@
+CC = @CC@
+DLLTOOL = @DLLTOOL@
+ECHO = @ECHO@
+EXEEXT = @EXEEXT@
+LIBTOOL = @LIBTOOL@
+LN_S = @LN_S@
+MAKEINFO = @MAKEINFO@
+OBJDUMP = @OBJDUMP@
+OBJEXT = @OBJEXT@
+PACKAGE = @PACKAGE@
+RANLIB = @RANLIB@
+STRIP = @STRIP@
+VERSION = @VERSION@
+
+noinst_PROGRAMS =    alpha		  beam		  candlestick     cone            cylinder        helix           helix2          helix3          helix4          helixtex        horn            joincone        joinoffset      joinstyle       screw           taper           texas           transport       twistoid        twistex         twoid
+
+
+alpha_SOURCES = alpha.c mainjoin.c
+beam_SOURCES = beam.c mainsimple.c
+cone_SOURCES = cone.c mainsimple.c
+cylinder_SOURCES = cylinder.c mainsimple.c
+helix_SOURCES = helix.c mainsimple.c
+helix2_SOURCES = helix2.c mainsimple.c
+helix3_SOURCES = helix3.c mainsimple.c
+helix4_SOURCES = helix4.c mainsimple.c
+helixtex_SOURCES = helixtex.c texture.c maintex.c
+horn_SOURCES = horn.c mainsimple.c
+joincone_SOURCES = cone.c mainjoin.c
+joinoffset_SOURCES = joinoffset.c mainjoin.c
+joinstyle_SOURCES = cylinder.c mainjoin.c
+screw_SOURCES = screw.c texture.c maintex.c
+taper_SOURCES = taper.c mainsimple.c
+texas_SOURCES = texas.c mainjoin.c
+twistoid_SOURCES = twoid.c
+twistex_SOURCES = twistoid.c texture.c maintex.c
+
+EXTRA_DIST =    .cvsignore Makefile.examples rundemo README
+
+
+noinst_HEADERS =    main.h   texture.h
+
+
+INCLUDES =    @X_CFLAGS@   -I${top_srcdir}   -I${top_srcdir}/src 
+
+
+LDADD = @X_LIBS@  -L../src/
+
+docdir = $(datadir)/doc/gle/examples
+
+doc_DATA =     COPYING    Makefile.examples    README    rundemo    main.h    texture.h    alpha.c    beam.c    candlestick.c    cone.c    cylinder.c    helix.c    helix2.c    helix3.c    helix4.c    helixtex.c    horn.c    joinoffset.c    mainjoin.c    mainsimple.c    maintex.c    screw.c    taper.c    texas.c    texture.c    transport.c    twoid.c    twistoid.c
+
+mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+CONFIG_HEADER = ../config.h
+CONFIG_CLEAN_FILES = 
+noinst_PROGRAMS =  alpha$(EXEEXT) beam$(EXEEXT) candlestick$(EXEEXT) \
+cone$(EXEEXT) cylinder$(EXEEXT) helix$(EXEEXT) helix2$(EXEEXT) \
+helix3$(EXEEXT) helix4$(EXEEXT) helixtex$(EXEEXT) horn$(EXEEXT) \
+joincone$(EXEEXT) joinoffset$(EXEEXT) joinstyle$(EXEEXT) screw$(EXEEXT) \
+taper$(EXEEXT) texas$(EXEEXT) transport$(EXEEXT) twistoid$(EXEEXT) \
+twistex$(EXEEXT) twoid$(EXEEXT)
+PROGRAMS =  $(noinst_PROGRAMS)
+
+
+DEFS = @DEFS@ -I. -I$(srcdir) -I..
+CPPFLAGS = @CPPFLAGS@
+LDFLAGS = @LDFLAGS@
+LIBS = @LIBS@
+X_CFLAGS = @X_CFLAGS@
+X_LIBS = @X_LIBS@
+X_EXTRA_LIBS = @X_EXTRA_LIBS@
+X_PRE_LIBS = @X_PRE_LIBS@
+alpha_OBJECTS =  alpha.$(OBJEXT) mainjoin.$(OBJEXT)
+alpha_LDADD = $(LDADD)
+alpha_DEPENDENCIES = 
+alpha_LDFLAGS = 
+beam_OBJECTS =  beam.$(OBJEXT) mainsimple.$(OBJEXT)
+beam_LDADD = $(LDADD)
+beam_DEPENDENCIES = 
+beam_LDFLAGS = 
+candlestick_SOURCES = candlestick.c
+candlestick_OBJECTS =  candlestick.$(OBJEXT)
+candlestick_LDADD = $(LDADD)
+candlestick_DEPENDENCIES = 
+candlestick_LDFLAGS = 
+cone_OBJECTS =  cone.$(OBJEXT) mainsimple.$(OBJEXT)
+cone_LDADD = $(LDADD)
+cone_DEPENDENCIES = 
+cone_LDFLAGS = 
+cylinder_OBJECTS =  cylinder.$(OBJEXT) mainsimple.$(OBJEXT)
+cylinder_LDADD = $(LDADD)
+cylinder_DEPENDENCIES = 
+cylinder_LDFLAGS = 
+helix_OBJECTS =  helix.$(OBJEXT) mainsimple.$(OBJEXT)
+helix_LDADD = $(LDADD)
+helix_DEPENDENCIES = 
+helix_LDFLAGS = 
+helix2_OBJECTS =  helix2.$(OBJEXT) mainsimple.$(OBJEXT)
+helix2_LDADD = $(LDADD)
+helix2_DEPENDENCIES = 
+helix2_LDFLAGS = 
+helix3_OBJECTS =  helix3.$(OBJEXT) mainsimple.$(OBJEXT)
+helix3_LDADD = $(LDADD)
+helix3_DEPENDENCIES = 
+helix3_LDFLAGS = 
+helix4_OBJECTS =  helix4.$(OBJEXT) mainsimple.$(OBJEXT)
+helix4_LDADD = $(LDADD)
+helix4_DEPENDENCIES = 
+helix4_LDFLAGS = 
+helixtex_OBJECTS =  helixtex.$(OBJEXT) texture.$(OBJEXT) \
+maintex.$(OBJEXT)
+helixtex_LDADD = $(LDADD)
+helixtex_DEPENDENCIES = 
+helixtex_LDFLAGS = 
+horn_OBJECTS =  horn.$(OBJEXT) mainsimple.$(OBJEXT)
+horn_LDADD = $(LDADD)
+horn_DEPENDENCIES = 
+horn_LDFLAGS = 
+joincone_OBJECTS =  cone.$(OBJEXT) mainjoin.$(OBJEXT)
+joincone_LDADD = $(LDADD)
+joincone_DEPENDENCIES = 
+joincone_LDFLAGS = 
+joinoffset_OBJECTS =  joinoffset.$(OBJEXT) mainjoin.$(OBJEXT)
+joinoffset_LDADD = $(LDADD)
+joinoffset_DEPENDENCIES = 
+joinoffset_LDFLAGS = 
+joinstyle_OBJECTS =  cylinder.$(OBJEXT) mainjoin.$(OBJEXT)
+joinstyle_LDADD = $(LDADD)
+joinstyle_DEPENDENCIES = 
+joinstyle_LDFLAGS = 
+screw_OBJECTS =  screw.$(OBJEXT) texture.$(OBJEXT) maintex.$(OBJEXT)
+screw_LDADD = $(LDADD)
+screw_DEPENDENCIES = 
+screw_LDFLAGS = 
+taper_OBJECTS =  taper.$(OBJEXT) mainsimple.$(OBJEXT)
+taper_LDADD = $(LDADD)
+taper_DEPENDENCIES = 
+taper_LDFLAGS = 
+texas_OBJECTS =  texas.$(OBJEXT) mainjoin.$(OBJEXT)
+texas_LDADD = $(LDADD)
+texas_DEPENDENCIES = 
+texas_LDFLAGS = 
+transport_SOURCES = transport.c
+transport_OBJECTS =  transport.$(OBJEXT)
+transport_LDADD = $(LDADD)
+transport_DEPENDENCIES = 
+transport_LDFLAGS = 
+twistoid_OBJECTS =  twoid.$(OBJEXT)
+twistoid_LDADD = $(LDADD)
+twistoid_DEPENDENCIES = 
+twistoid_LDFLAGS = 
+twistex_OBJECTS =  twistoid.$(OBJEXT) texture.$(OBJEXT) \
+maintex.$(OBJEXT)
+twistex_LDADD = $(LDADD)
+twistex_DEPENDENCIES = 
+twistex_LDFLAGS = 
+twoid_SOURCES = twoid.c
+twoid_OBJECTS =  twoid.$(OBJEXT)
+twoid_LDADD = $(LDADD)
+twoid_DEPENDENCIES = 
+twoid_LDFLAGS = 
+CFLAGS = @CFLAGS@
+COMPILE = $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+LTCOMPILE = $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+CCLD = $(CC)
+LINK = $(LIBTOOL) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(LDFLAGS) -o $@
+DATA =  $(doc_DATA)
+
+HEADERS =  $(noinst_HEADERS)
+
+DIST_COMMON =  README COPYING Makefile.am Makefile.in
+
+
+DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
+
+TAR = tar
+GZIP_ENV = --best
+SOURCES = $(alpha_SOURCES) $(beam_SOURCES) candlestick.c $(cone_SOURCES) $(cylinder_SOURCES) $(helix_SOURCES) $(helix2_SOURCES) $(helix3_SOURCES) $(helix4_SOURCES) $(helixtex_SOURCES) $(horn_SOURCES) $(joincone_SOURCES) $(joinoffset_SOURCES) $(joinstyle_SOURCES) $(screw_SOURCES) $(taper_SOURCES) $(texas_SOURCES) transport.c $(twistoid_SOURCES) $(twistex_SOURCES) twoid.c
+OBJECTS = $(alpha_OBJECTS) $(beam_OBJECTS) candlestick.$(OBJEXT) $(cone_OBJECTS) $(cylinder_OBJECTS) $(helix_OBJECTS) $(helix2_OBJECTS) $(helix3_OBJECTS) $(helix4_OBJECTS) $(helixtex_OBJECTS) $(horn_OBJECTS) $(joincone_OBJECTS) $(joinoffset_OBJECTS) $(joinstyle_OBJECTS) $(screw_OBJECTS) $(taper_OBJECTS) $(texas_OBJECTS) transport.$(OBJEXT) $(twistoid_OBJECTS) $(twistex_OBJECTS) twoid.$(OBJEXT)
+
+all: all-redirect
+.SUFFIXES:
+.SUFFIXES: .S .c .lo .o .obj .s
+$(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in $(ACLOCAL_M4) 
+	cd $(top_srcdir) && $(AUTOMAKE) --gnu --include-deps examples/Makefile
+
+Makefile: $(srcdir)/Makefile.in  $(top_builddir)/config.status
+	cd $(top_builddir) \
+	  && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+
+
+mostlyclean-noinstPROGRAMS:
+
+clean-noinstPROGRAMS:
+	-test -z "$(noinst_PROGRAMS)" || rm -f $(noinst_PROGRAMS)
+
+distclean-noinstPROGRAMS:
+
+maintainer-clean-noinstPROGRAMS:
+
+.c.o:
+	$(COMPILE) -c $<
+
+# FIXME: We should only use cygpath when building on Windows,
+# and only if it is available.
+.c.obj:
+	$(COMPILE) -c `cygpath -w $<`
+
+.s.o:
+	$(COMPILE) -c $<
+
+.S.o:
+	$(COMPILE) -c $<
+
+mostlyclean-compile:
+	-rm -f *.o core *.core
+	-rm -f *.$(OBJEXT)
+
+clean-compile:
+
+distclean-compile:
+	-rm -f *.tab.c
+
+maintainer-clean-compile:
+
+.c.lo:
+	$(LIBTOOL) --mode=compile $(COMPILE) -c $<
+
+.s.lo:
+	$(LIBTOOL) --mode=compile $(COMPILE) -c $<
+
+.S.lo:
+	$(LIBTOOL) --mode=compile $(COMPILE) -c $<
+
+mostlyclean-libtool:
+	-rm -f *.lo
+
+clean-libtool:
+	-rm -rf .libs _libs
+
+distclean-libtool:
+
+maintainer-clean-libtool:
+
+alpha$(EXEEXT): $(alpha_OBJECTS) $(alpha_DEPENDENCIES)
+	@rm -f alpha$(EXEEXT)
+	$(LINK) $(alpha_LDFLAGS) $(alpha_OBJECTS) $(alpha_LDADD) $(LIBS)
+
+beam$(EXEEXT): $(beam_OBJECTS) $(beam_DEPENDENCIES)
+	@rm -f beam$(EXEEXT)
+	$(LINK) $(beam_LDFLAGS) $(beam_OBJECTS) $(beam_LDADD) $(LIBS)
+
+candlestick$(EXEEXT): $(candlestick_OBJECTS) $(candlestick_DEPENDENCIES)
+	@rm -f candlestick$(EXEEXT)
+	$(LINK) $(candlestick_LDFLAGS) $(candlestick_OBJECTS) $(candlestick_LDADD) $(LIBS)
+
+cone$(EXEEXT): $(cone_OBJECTS) $(cone_DEPENDENCIES)
+	@rm -f cone$(EXEEXT)
+	$(LINK) $(cone_LDFLAGS) $(cone_OBJECTS) $(cone_LDADD) $(LIBS)
+
+cylinder$(EXEEXT): $(cylinder_OBJECTS) $(cylinder_DEPENDENCIES)
+	@rm -f cylinder$(EXEEXT)
+	$(LINK) $(cylinder_LDFLAGS) $(cylinder_OBJECTS) $(cylinder_LDADD) $(LIBS)
+
+helix$(EXEEXT): $(helix_OBJECTS) $(helix_DEPENDENCIES)
+	@rm -f helix$(EXEEXT)
+	$(LINK) $(helix_LDFLAGS) $(helix_OBJECTS) $(helix_LDADD) $(LIBS)
+
+helix2$(EXEEXT): $(helix2_OBJECTS) $(helix2_DEPENDENCIES)
+	@rm -f helix2$(EXEEXT)
+	$(LINK) $(helix2_LDFLAGS) $(helix2_OBJECTS) $(helix2_LDADD) $(LIBS)
+
+helix3$(EXEEXT): $(helix3_OBJECTS) $(helix3_DEPENDENCIES)
+	@rm -f helix3$(EXEEXT)
+	$(LINK) $(helix3_LDFLAGS) $(helix3_OBJECTS) $(helix3_LDADD) $(LIBS)
+
+helix4$(EXEEXT): $(helix4_OBJECTS) $(helix4_DEPENDENCIES)
+	@rm -f helix4$(EXEEXT)
+	$(LINK) $(helix4_LDFLAGS) $(helix4_OBJECTS) $(helix4_LDADD) $(LIBS)
+
+helixtex$(EXEEXT): $(helixtex_OBJECTS) $(helixtex_DEPENDENCIES)
+	@rm -f helixtex$(EXEEXT)
+	$(LINK) $(helixtex_LDFLAGS) $(helixtex_OBJECTS) $(helixtex_LDADD) $(LIBS)
+
+horn$(EXEEXT): $(horn_OBJECTS) $(horn_DEPENDENCIES)
+	@rm -f horn$(EXEEXT)
+	$(LINK) $(horn_LDFLAGS) $(horn_OBJECTS) $(horn_LDADD) $(LIBS)
+
+joincone$(EXEEXT): $(joincone_OBJECTS) $(joincone_DEPENDENCIES)
+	@rm -f joincone$(EXEEXT)
+	$(LINK) $(joincone_LDFLAGS) $(joincone_OBJECTS) $(joincone_LDADD) $(LIBS)
+
+joinoffset$(EXEEXT): $(joinoffset_OBJECTS) $(joinoffset_DEPENDENCIES)
+	@rm -f joinoffset$(EXEEXT)
+	$(LINK) $(joinoffset_LDFLAGS) $(joinoffset_OBJECTS) $(joinoffset_LDADD) $(LIBS)
+
+joinstyle$(EXEEXT): $(joinstyle_OBJECTS) $(joinstyle_DEPENDENCIES)
+	@rm -f joinstyle$(EXEEXT)
+	$(LINK) $(joinstyle_LDFLAGS) $(joinstyle_OBJECTS) $(joinstyle_LDADD) $(LIBS)
+
+screw$(EXEEXT): $(screw_OBJECTS) $(screw_DEPENDENCIES)
+	@rm -f screw$(EXEEXT)
+	$(LINK) $(screw_LDFLAGS) $(screw_OBJECTS) $(screw_LDADD) $(LIBS)
+
+taper$(EXEEXT): $(taper_OBJECTS) $(taper_DEPENDENCIES)
+	@rm -f taper$(EXEEXT)
+	$(LINK) $(taper_LDFLAGS) $(taper_OBJECTS) $(taper_LDADD) $(LIBS)
+
+texas$(EXEEXT): $(texas_OBJECTS) $(texas_DEPENDENCIES)
+	@rm -f texas$(EXEEXT)
+	$(LINK) $(texas_LDFLAGS) $(texas_OBJECTS) $(texas_LDADD) $(LIBS)
+
+transport$(EXEEXT): $(transport_OBJECTS) $(transport_DEPENDENCIES)
+	@rm -f transport$(EXEEXT)
+	$(LINK) $(transport_LDFLAGS) $(transport_OBJECTS) $(transport_LDADD) $(LIBS)
+
+twistoid$(EXEEXT): $(twistoid_OBJECTS) $(twistoid_DEPENDENCIES)
+	@rm -f twistoid$(EXEEXT)
+	$(LINK) $(twistoid_LDFLAGS) $(twistoid_OBJECTS) $(twistoid_LDADD) $(LIBS)
+
+twistex$(EXEEXT): $(twistex_OBJECTS) $(twistex_DEPENDENCIES)
+	@rm -f twistex$(EXEEXT)
+	$(LINK) $(twistex_LDFLAGS) $(twistex_OBJECTS) $(twistex_LDADD) $(LIBS)
+
+twoid$(EXEEXT): $(twoid_OBJECTS) $(twoid_DEPENDENCIES)
+	@rm -f twoid$(EXEEXT)
+	$(LINK) $(twoid_LDFLAGS) $(twoid_OBJECTS) $(twoid_LDADD) $(LIBS)
+
+install-docDATA: $(doc_DATA)
+	@$(NORMAL_INSTALL)
+	$(mkinstalldirs) $(DESTDIR)$(docdir)
+	@list='$(doc_DATA)'; for p in $$list; do \
+	  if test -f $(srcdir)/$$p; then \
+	    echo " $(INSTALL_DATA) $(srcdir)/$$p $(DESTDIR)$(docdir)/$$p"; \
+	    $(INSTALL_DATA) $(srcdir)/$$p $(DESTDIR)$(docdir)/$$p; \
+	  else if test -f $$p; then \
+	    echo " $(INSTALL_DATA) $$p $(DESTDIR)$(docdir)/$$p"; \
+	    $(INSTALL_DATA) $$p $(DESTDIR)$(docdir)/$$p; \
+	  fi; fi; \
+	done
+
+uninstall-docDATA:
+	@$(NORMAL_UNINSTALL)
+	list='$(doc_DATA)'; for p in $$list; do \
+	  rm -f $(DESTDIR)$(docdir)/$$p; \
+	done
+
+tags: TAGS
+
+ID: $(HEADERS) $(SOURCES) $(LISP)
+	list='$(SOURCES) $(HEADERS)'; \
+	unique=`for i in $$list; do echo $$i; done | \
+	  awk '    { files[$$0] = 1; } \
+	       END { for (i in files) print i; }'`; \
+	here=`pwd` && cd $(srcdir) \
+	  && mkid -f$$here/ID $$unique $(LISP)
+
+TAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) $(LISP)
+	tags=; \
+	here=`pwd`; \
+	list='$(SOURCES) $(HEADERS)'; \
+	unique=`for i in $$list; do echo $$i; done | \
+	  awk '    { files[$$0] = 1; } \
+	       END { for (i in files) print i; }'`; \
+	test -z "$(ETAGS_ARGS)$$unique$(LISP)$$tags" \
+	  || (cd $(srcdir) && etags -o $$here/TAGS $(ETAGS_ARGS) $$tags  $$unique $(LISP))
+
+mostlyclean-tags:
+
+clean-tags:
+
+distclean-tags:
+	-rm -f TAGS ID
+
+maintainer-clean-tags:
+
+distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
+
+subdir = examples
+
+distdir: $(DISTFILES)
+	@for file in $(DISTFILES); do \
+	  d=$(srcdir); \
+	  if test -d $$d/$$file; then \
+	    cp -pr $$d/$$file $(distdir)/$$file; \
+	  else \
+	    test -f $(distdir)/$$file \
+	    || ln $$d/$$file $(distdir)/$$file 2> /dev/null \
+	    || cp -p $$d/$$file $(distdir)/$$file || :; \
+	  fi; \
+	done
+alpha.o: alpha.c ../GL/gle.h main.h
+beam.o: beam.c ../GL/gle.h main.h
+candlestick.o: candlestick.c ../GL/gle.h main.h
+cone.o: cone.c ../GL/gle.h main.h
+cylinder.o: cylinder.c ../GL/gle.h main.h
+helix.o: helix.c ../GL/gle.h main.h
+helix2.o: helix2.c ../GL/gle.h main.h
+helix3.o: helix3.c ../GL/gle.h main.h
+helix4.o: helix4.c ../GL/gle.h main.h
+helixtex.o: helixtex.c ../GL/gle.h main.h texture.h
+horn.o: horn.c ../GL/gle.h main.h
+joinoffset.o: joinoffset.c ../GL/gle.h main.h
+mainjoin.o: mainjoin.c ../GL/gle.h main.h
+mainsimple.o: mainsimple.c main.h
+maintex.o: maintex.c ../GL/gle.h main.h texture.h
+screw.o: screw.c ../GL/gle.h main.h texture.h
+taper.o: taper.c ../GL/gle.h main.h
+texas.o: texas.c ../GL/gle.h main.h
+texture.o: texture.c texture.h
+transport.o: transport.c ../GL/gle.h main.h
+twistoid.o: twistoid.c ../GL/gle.h main.h
+twoid.o: twoid.c ../GL/gle.h main.h
+
+info-am:
+info: info-am
+dvi-am:
+dvi: dvi-am
+check-am: all-am
+check: check-am
+installcheck-am:
+installcheck: installcheck-am
+install-exec-am:
+install-exec: install-exec-am
+
+install-data-am: install-docDATA
+install-data: install-data-am
+
+install-am: all-am
+	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
+install: install-am
+uninstall-am: uninstall-docDATA
+uninstall: uninstall-am
+all-am: Makefile $(PROGRAMS) $(DATA) $(HEADERS)
+all-redirect: all-am
+install-strip:
+	$(MAKE) $(AM_MAKEFLAGS) AM_INSTALL_PROGRAM_FLAGS=-s install
+installdirs:
+	$(mkinstalldirs)  $(DESTDIR)$(docdir)
+
+
+mostlyclean-generic:
+
+clean-generic:
+
+distclean-generic:
+	-rm -f Makefile $(CONFIG_CLEAN_FILES)
+	-rm -f config.cache config.log stamp-h stamp-h[0-9]*
+
+maintainer-clean-generic:
+mostlyclean-am:  mostlyclean-noinstPROGRAMS mostlyclean-compile \
+		mostlyclean-libtool mostlyclean-tags \
+		mostlyclean-generic
+
+mostlyclean: mostlyclean-am
+
+clean-am:  clean-noinstPROGRAMS clean-compile clean-libtool clean-tags \
+		clean-generic mostlyclean-am
+
+clean: clean-am
+
+distclean-am:  distclean-noinstPROGRAMS distclean-compile \
+		distclean-libtool distclean-tags distclean-generic \
+		clean-am
+	-rm -f libtool
+
+distclean: distclean-am
+
+maintainer-clean-am:  maintainer-clean-noinstPROGRAMS \
+		maintainer-clean-compile maintainer-clean-libtool \
+		maintainer-clean-tags maintainer-clean-generic \
+		distclean-am
+	@echo "This command is intended for maintainers to use;"
+	@echo "it deletes files that may require special tools to rebuild."
+
+maintainer-clean: maintainer-clean-am
+
+.PHONY: mostlyclean-noinstPROGRAMS distclean-noinstPROGRAMS \
+clean-noinstPROGRAMS maintainer-clean-noinstPROGRAMS \
+mostlyclean-compile distclean-compile clean-compile \
+maintainer-clean-compile mostlyclean-libtool distclean-libtool \
+clean-libtool maintainer-clean-libtool uninstall-docDATA \
+install-docDATA tags mostlyclean-tags distclean-tags clean-tags \
+maintainer-clean-tags distdir info-am info dvi-am dvi check check-am \
+installcheck-am installcheck install-exec-am install-exec \
+install-data-am install-data install-am install uninstall-am uninstall \
+all-redirect all-am all installdirs mostlyclean-generic \
+distclean-generic clean-generic maintainer-clean-generic clean \
+mostlyclean distclean maintainer-clean
+
+
+run:
+	rundemo
+
+# Tell versions [3.59,3.63) of GNU make to not export all variables.
+# Otherwise a system limit (for SysV at least) may be exceeded.
+.NOEXPORT:
