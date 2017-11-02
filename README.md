@@ -42,6 +42,18 @@ The demos require that the GLUT windowing and
 utility library be installed.  GLUT can be obtained
 at http://reality.sgi.com/mjk_asd/glut3/glut3.html
 
+On Debian
+---------
+On modern Linux systems, skip the above, and instead, just say:
+```
+sudo apt-get install libgle3-dev
+```
+This will give you everything in this git repo, precompiled.
+If you want to compile from source, you will need this:
+```
+apt-get install libgl1-mesa-dev libxmu-dev libxi-dev freeglut3-dev
+```
+
 Compiling
 ---------
 GLE uses the standard GNU automake/autoconf build process,
