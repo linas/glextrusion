@@ -123,5 +123,3 @@ Running
 Some of the example programs will hang or crash when run on
 older versions of MesaGL/Linux.  This is due to bugs in the 
 MesaGL tesellator.  Newer versions should work fine.
-
---------- the end ----------
