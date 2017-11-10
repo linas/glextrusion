@@ -13,7 +13,9 @@
  * Copyright (c) 1994,1995 Linas Vepstas <linas@linas.org>
  */
 
-#include <malloc.h>
+#if defined(_WIN32) && !defined(__clang__)
+# include <malloc.h>
+#endif
 #include <math.h>
 #include <stdlib.h>
 

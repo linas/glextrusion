@@ -277,7 +277,10 @@ extern void uviewpoint (gleDouble m[4][4],	/* returned */
 
 %{
 #include <unistd.h>
-#include <malloc.h>
+#include <stdlib.h>
+#if defined(_WIN32) && !defined(__clang__)
+# include <malloc.h>
+#endif
 
 #include "port.h"
 #include "tube_gc.h"
