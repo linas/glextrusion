@@ -23,9 +23,12 @@ dnl Process this file with autoconf to produce a configure script.
 ### check for various programs, and stuff (do this first because later
 ### commands depend on them):
 
-AC_INIT(src/gle.h)
+AC_INIT(src/GL/gle.h)
 AM_INIT_AUTOMAKE(gle,3.1.0)
 AM_CONFIG_HEADER(config.h)
+
+m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])],
+                            [AC_SUBST([AM_DEFAULT_VERBOSITY],1)])
 
 AC_PROG_CC
 AC_PROG_INSTALL
