@@ -87,5 +87,5 @@ doc_DATA =  $(html_HTML) $(gif_HTML) $(giforig_HTML) README
 
 EXTRA_DIST = .cvsignore $(doc_DATA)
 
-SUFFIXES += .html .gif .jpg
+SUFFIXES = .html .gif .jpg
 

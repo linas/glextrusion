@@ -22,7 +22,7 @@ EXTRA_DIST = \
   $(man_RAW) \
   Makefile.sgi
 
-SUFFIXES += .man .3gle
+SUFFIXES = .man .3gle
 
 # for the ordinary install, just copy the raw files ....
 .man.3gle:
@@ -38,4 +38,4 @@ SUFFIXES += .man .3gle
 	psroff -t -man < $< > $*.ps
 
 
-CLEANFILES += $(man_MANS)
+CLEANFILES = $(man_MANS)
