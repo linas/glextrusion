@@ -1,4 +1,4 @@
-/* config.h.in.  Generated from configure.in by autoheader.  */
+/* config.h.in.  Generated from configure.ac by autoheader.  */
 /********************************************************************\
  * acconfig.h -- configuration defines for gle                      *
  * Copyright (C) 2000 Linas Vepstas (linas@linas.org)               *
