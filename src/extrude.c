@@ -16,7 +16,9 @@
  */
 
 
-#include <malloc.h>
+#if defined(_WIN32) && !defined(__clang__)
+# include <malloc.h>
+#endif
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>	/* for the memcpy() subroutine */

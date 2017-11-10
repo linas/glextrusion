@@ -16,7 +16,9 @@
  * Copyright (c) 1991,1993,2003 Linas Vepstas <linas@linas.org>
  */
 
-#include <malloc.h>
+#if defined(_WIN32) && !defined(__clang__)
+# include <malloc.h>
+#endif
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>	/* for the memcpy() subroutine */

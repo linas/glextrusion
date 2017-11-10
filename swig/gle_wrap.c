@@ -692,8 +692,9 @@ extern void uviewpoint(double [4][4],double [3],double [3],double [3]);
 #ifndef WIN32
 #include <unistd.h>
 #endif
-#include <malloc.h>
-
+#if defined(_WIN32) && !defined(__clang__)
+# include <malloc.h>
+#endif
 #include "port.h"
 #include "tube_gc.h"
 
