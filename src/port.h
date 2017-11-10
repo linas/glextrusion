@@ -17,9 +17,6 @@
 
 #include <stdio.h>
 
-/* most of the build-specific info should be in configure.in */
-#include "../config.h"
-
 #ifndef TRUE
 #define TRUE 1
 #endif

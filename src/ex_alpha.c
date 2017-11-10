@@ -11,7 +11,6 @@
  * Copyright (c) 2003 Linas Vepstas <linas@linas.org>
  */
 
-#include "config.h"
 #include "gle.h"
 #include "port.h"
 
