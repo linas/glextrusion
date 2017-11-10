@@ -27,7 +27,7 @@ libgle_la_LDFLAGS = -version-info 4:0:1
 pkgincludedir = $(includedir)/GL
 GLdir = $(includedir)/GL
 
-GL_DATA =	gle.h
+GL_DATA =	GL/gle.h
 
 noinst_HEADERS = 	\
   copy.h 		\
@@ -44,10 +44,11 @@ EXTRA_DIST = \
   .cvsignore \
   README.gutil \
   COPYING.src \
-  gle.h
+  GL/gle.h
 
 AM_CPPFLAGS = \
-  @X_CFLAGS@
+  @X_CFLAGS@ \
+  -I ${top_srcdir}/src/GL
 
 CFLAGS = @CFLAGS@ -Wall -pedantic -Wstrict-prototypes  -Wconversion
 
