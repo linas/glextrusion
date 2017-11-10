@@ -7,4 +7,4 @@ EXTRA_DIST = \
 
 docdir = $(datadir)/doc/gle/
 
-doc_DATA = AUTHORS README COPYING
+doc_DATA = AUTHORS README.md COPYING
