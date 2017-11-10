@@ -1,7 +1,7 @@
 
 noinst_PROGRAMS = 	\
-  alpha		\
-  beam		\
+  alpha         \
+  beam          \
   candlestick   \
   cone          \
   cylinder      \
@@ -51,7 +51,7 @@ noinst_HEADERS = \
   main.h \
   texture.h
 
-INCLUDES = \
+AM_CPPFLAGS = \
   @X_CFLAGS@ \
   -I${top_srcdir} \
   -I${top_srcdir}/src 

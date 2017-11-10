@@ -23,7 +23,7 @@ libgle_la_SOURCES = 	\
 
 libgle_la_LDFLAGS = -version-info 4:0:1
 
-# make sure we install gle.h into /usr/include/GL/gle.h or thereabouts
+# Make sure we install gle.h into /usr/include/GL/gle.h or thereabouts
 pkgincludedir = $(includedir)/GL
 GLdir = $(includedir)/GL
 
@@ -46,7 +46,7 @@ EXTRA_DIST = \
   COPYING.src \
   gle.h
 
-INCLUDES = \
+AM_CPPFLAGS = \
   @X_CFLAGS@
 
 CFLAGS = @CFLAGS@ -Wall -pedantic -Wstrict-prototypes  -Wconversion
@@ -54,4 +54,3 @@ CFLAGS = @CFLAGS@ -Wall -pedantic -Wstrict-prototypes  -Wconversion
 docdir = $(datadir)/doc/gle/
 
 doc_DATA = COPYING.src
-
