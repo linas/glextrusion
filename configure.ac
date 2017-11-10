@@ -25,7 +25,6 @@ dnl Process this file with autoconf to produce a configure script.
 
 AC_INIT(src/GL/gle.h)
 AM_INIT_AUTOMAKE(gle,3.1.0)
-AM_CONFIG_HEADER(config.h)
 
 AC_CONFIG_MACRO_DIR([m4])
 
