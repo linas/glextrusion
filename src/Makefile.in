@@ -222,7 +222,7 @@ AUTOMAKE = @AUTOMAKE@
 AWK = @AWK@
 CC = @CC@
 CCDEPMODE = @CCDEPMODE@
-CFLAGS = @CFLAGS@ -Wall -pedantic -Wstrict-prototypes  -Wconversion
+CFLAGS = @CFLAGS@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
 CYGPATH_W = @CYGPATH_W@
@@ -371,10 +371,8 @@ EXTRA_DIST = \
   COPYING.src \
   GL/gle.h
 
-AM_CPPFLAGS = \
-  @X_CFLAGS@ \
-  -I ${top_srcdir}/src/GL
-
+AM_CFLAGS = @X_CFLAGS@ -I ${top_srcdir}/src/GL -Wall -pedantic \
+	-Wstrict-prototypes -Wconversion
 doc_DATA = COPYING.src
 all: all-am
 
