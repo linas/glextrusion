@@ -50,7 +50,7 @@ AM_CPPFLAGS = \
   @X_CFLAGS@ \
   -I ${top_srcdir}/src/GL
 
-CFLAGS = @CFLAGS@ -Wall -pedantic -Wstrict-prototypes  -Wconversion
+AM_CFLAGS = @AM_CFLAGS@ -Wall -pedantic -Wstrict-prototypes  -Wconversion
 
 docdir = $(datadir)/doc/gle/
 
