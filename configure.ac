@@ -24,7 +24,7 @@ dnl Process this file with autoconf to produce a configure script.
 ### commands depend on them):
 
 AC_INIT([gle], 3.1.1)
-AM_INIT_AUTOMAKE
+AM_INIT_AUTOMAKE([foreign])
 
 AC_CONFIG_MACRO_DIR([m4])
 
