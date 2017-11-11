@@ -23,7 +23,7 @@ dnl Process this file with autoconf to produce a configure script.
 ### check for various programs, and stuff (do this first because later
 ### commands depend on them):
 
-AC_INIT([glextrusion], 3.1.1)
+AC_INIT([gle], 3.1.1)
 AM_INIT_AUTOMAKE
 
 AC_CONFIG_MACRO_DIR([m4])
