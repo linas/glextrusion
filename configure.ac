@@ -1,9 +1,9 @@
 ## -*-m4-*-
 
-dnl Process this file with autoconf to produce a configure script.
+dnl Process this file with autoreconf -vi to produce a configure script.
 
 # FILE:
-# configure.in
+# configure.ac
 #
 # FUNCTION:
 # implements checks for a variety of system-specific functions
@@ -23,7 +23,7 @@ dnl Process this file with autoconf to produce a configure script.
 ### check for various programs, and stuff (do this first because later
 ### commands depend on them):
 
-AC_INIT([gle], 3.1.1)
+AC_INIT([glextrusion], 3.1.1, [], [gle], [https://github.com/linas/glextrusion])
 AM_INIT_AUTOMAKE([foreign])
 
 AC_CONFIG_MACRO_DIR([m4])
@@ -149,6 +149,5 @@ AC_OUTPUT(
           man/Makefile
           ms-visual-c/Makefile
           ms-visual-c/gle/Makefile
-          swig/Makefile,
-          [ln -sf src GL]
+          swig/Makefile
           )
