@@ -46,11 +46,11 @@ EXTRA_DIST = \
   COPYING.src \
   GL/gle.h
 
-AM_CPPFLAGS = \
+AM_CFLAGS = \
   @X_CFLAGS@ \
   -I ${top_srcdir}/src/GL
 
-AM_CFLAGS = @AM_CFLAGS@ -Wall -pedantic -Wstrict-prototypes  -Wconversion
+AM_CFLAGS += -Wall -pedantic -Wstrict-prototypes  -Wconversion
 
 docdir = $(datadir)/doc/gle/
 
