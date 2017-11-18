@@ -13,12 +13,9 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D813099C-C7B8-43A3-9678-94EFB3E530FC}</ProjectGuid>
     <RootNamespace>StaticLib</RootNamespace>
-    <SccProjectName>
-    </SccProjectName>
-    <SccLocalPath>
-    </SccLocalPath>
-    <SccProvider>
-    </SccProvider>
+    <SccProjectName>"$/VS17/VC++/ExtrusionLib/StaticLib", ZDCBAAAA</SccProjectName>
+    <SccLocalPath>.</SccLocalPath>
+    <SccProvider>MSSCCI:Microsoft Visual SourceSafe</SccProvider>
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -84,7 +81,7 @@
       <Command>copy "$(TargetPath)" "$(SolutionDir)lib\$(TargetFileName)"
 copy "$(OutDir)$(TargetName).pdb" "$(SolutionDir)lib\$(TargetName).pdb"
 copy "$(ProjectDir)ExtrusionLib.h" "$(SolutionDir)include\ExtrusionLib.h"
-ccopy "$(ProjectDir)gleBaseExtrusion.h" "$(SolutionDir)include\gleBaseExtrusion.h"
+copy "$(ProjectDir)gleBaseExtrusion.h" "$(SolutionDir)include\gleBaseExtrusion.h"
 copy "$(ProjectDir)gleConeExtrusion.h" "$(SolutionDir)include\gleConeExtrusion.h"
 copy "$(ProjectDir)gleCylinderExtrusion.h" "$(SolutionDir)include\gleCylinderExtrusion.h"
 copy "$(ProjectDir)gleExtrusion.h" "$(SolutionDir)include\gleExtrusion.h"
@@ -117,6 +114,7 @@ copy "$(ProjectDir)gleTwistExtrusion.h" "$(SolutionDir)include\gleTwistExtrusion
       <DebugInformationFormat>
       </DebugInformationFormat>
       <DisableSpecificWarnings>4100;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
     <Lib>
       <OutputFile>$(OutDir)$(TargetFileName)</OutputFile>
@@ -159,7 +157,6 @@ copy "$(ProjectDir)gleTwistExtrusion.h" "$(SolutionDir)include\gleTwistExtrusion
     <ClCompile Include="gleToroidExtrusion.cpp" />
     <ClCompile Include="gleTwistedIBeam.cpp" />
     <ClCompile Include="gleTwistExtrusion.cpp" />
-    <ClCompile Include="StaticLib.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -185,6 +182,9 @@ copy "$(ProjectDir)gleTwistExtrusion.h" "$(SolutionDir)include\gleTwistExtrusion
     <ClInclude Include="gleTwistExtrusion.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Readme.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
