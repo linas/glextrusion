@@ -2,7 +2,7 @@
 *									     GLE32 Extrusion Library							*
 *							Copyright© 2000 - 2017 by Dave Richards	 			*
 *										  All Rights Reserved.							*
-*												Ver 5.0									*
+*												Ver 6.0									*
 *																				       		*
 *											HISTORY:										*
 *									Linas Vepstas 1990 - 1997							*
@@ -12,6 +12,15 @@
 
 #pragma once
 
+/////////////////////////////////////////////////////////////////////////////////////
+///
+/// <summary>This is the ancestor class of all the extrusion objects. It provides the means to create any of the 
+/// descendant classes, but is as yet unconfigured. </summary>
+/// \details  The descendant classes just configure the base class for a particular mode of use, and simplify the 
+/// setup. This class isn't abstract, but isn't really meant to be instantiated directly, as indicated by the fact that the 
+/// drawing functions aren't publicly accessible.
+///
+/////////////////////////////////////////////////////////////////////////////////////
 //----------------------------------------------------------------------------
 class CgleBaseExtrusion
 {
@@ -20,15 +29,61 @@ class CgleBaseExtrusion
 public:
 
 
+/////////////////////////////////////////////////////////////////////////////////////
+///
+/// <summary></summary>
+/// \details
+///
+/// @param	Points
+/// @param	ContourPoints
+/// @param	Radius
+///
+/////////////////////////////////////////////////////////////////////////////////////
 	CgleBaseExtrusion(int Points, int ContourPoints, double  Radius);
 	virtual ~CgleBaseExtrusion();
 
 
+/////////////////////////////////////////////////////////////////////////////////////
+///
+/// <summary></summary>
+/// \details
+///
+/// @param	mode
+///
+/// \retval		void
+///
+/////////////////////////////////////////////////////////////////////////////////////
 	void SetExtrusionMode(int mode);
+/////////////////////////////////////////////////////////////////////////////////////
+///
+/// <summary></summary>
+/// \details
+///
+/// \retval		int
+///
+/////////////////////////////////////////////////////////////////////////////////////
 	int  GetExtrusionMode() const;
 
-	void SetTextureMode(int mode);
-	int  GetTextureMode() const;
+/////////////////////////////////////////////////////////////////////////////////////
+///
+/// <summary></summary>
+/// \details
+///
+/// @param	mode
+///
+/// \retval		void
+///
+/////////////////////////////////////////////////////////////////////////////////////
+	void SetTextureMode(gleTexMode mode);
+/////////////////////////////////////////////////////////////////////////////////////
+///
+/// <summary></summary>
+/// \details
+///
+/// \retval		gleTexMode
+///
+/////////////////////////////////////////////////////////////////////////////////////
+	gleTexMode  GetTextureMode() const;
 
 	void UseLitMaterial(bool value);
 	bool IsUsingLitMaterial() const;
@@ -40,6 +95,7 @@ protected:
 
 	void  LoadContourPoint(int Index, double X, double Y);
 
+	/// @cond
 	void DrawExtrusion(double Point_Array[][3], float Color_Array[][3], bool bTextured = false);
 
 
@@ -59,9 +115,9 @@ protected:
 	double  *m_ptrUp;
 
 	bool m_bUseLitMaterial;
-	int m_iJoinStyle;
+	int m_iExtrusionMode;
 
-	int m_iTexMode;
+	gleTexMode m_TexMode;
 
 	bool m_bTexEnabled;
 
@@ -170,6 +226,7 @@ private:
 
 	void Extrusion_Raw_Join();
 
+	/// @endcond
 
 };
 //----------------------------------------------------------------------------

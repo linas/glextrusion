@@ -2,7 +2,7 @@
 *									     GLE32 Extrusion Library							*
 *							Copyright© 2000 - 2017 by Dave Richards	 			*
 *										  All Rights Reserved.							*
-*												Ver 5.0									*
+*												Ver 6.0									*
 *																				       		*
 *											HISTORY:										*
 *									Linas Vepstas 1990 - 1997							*
@@ -31,7 +31,9 @@ public:
 
 protected:
 
+/// @cond
 	void  Gen_PolyCone(double Point_Array[][3], float Color_Array[][3], double Radius, bool bTextured);
+/// @endcond
 
 
 private:

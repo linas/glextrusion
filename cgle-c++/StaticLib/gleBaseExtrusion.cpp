@@ -2,7 +2,7 @@
 *									     GLE32 Extrusion Library							*
 *							Copyright© 2000 - 2017 by Dave Richards	 			*
 *										  All Rights Reserved.							*
-*												Ver 5.0									*
+*												Ver 6.0									*
 *																				       		*
 *											HISTORY:										*
 *									Linas Vepstas 1990 - 1997							*
@@ -14,11 +14,25 @@
 #include "extrusioninternals.h"
 #include "gleBaseExtrusion.h"
 
+/// @cond
 extern gleGC *_gle_gc;
 extern bool StatUseLitMat;                         // glColor / Tess routines
+/// @endcond
 
+
+							
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
+/////////////////////////////////////////////////////////////////////////////////////
+///
+/// <summary>Creates a new CgleBaseExtrusion object.</summary>
+/// \details 
+///
+/// @param	Points The number of points to be passed to the draw function PointArray and ColorArray parameters.
+/// @param	The number of ContourPoints to be passed to LoadContourPoint.
+/// @param	The nominal Radius of the extrusion.
+///
+/////////////////////////////////////////////////////////////////////////////////////
 CgleBaseExtrusion::CgleBaseExtrusion(int Points, int ContourPoints, double Radius)
 {
 	m_iPoints = Points;
@@ -51,9 +65,10 @@ CgleBaseExtrusion::CgleBaseExtrusion(int Points, int ContourPoints, double Radiu
 
 	FCapLoop = new double[(m_iContourPoints + 3) * 3];
 
-	m_iJoinStyle = GLE_JN_ANGLE | GLE_JN_CAP | GLE_NORM_FACET |
+	m_iExtrusionMode = GLE_JN_ANGLE | GLE_JN_CAP | GLE_NORM_FACET |
 																GLE_CONTOUR_CLOSED;
-	m_iTexMode = GLE_TEXTURE_VERTEX_CYL;
+
+	m_TexMode = gleTexMode::GLE_TEXTURE_VERTEX_CYL;
 
 }
 
@@ -80,6 +95,167 @@ CgleBaseExtrusion::~CgleBaseExtrusion()
 }
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
+/////////////////////////////////////////////////////////////////////////////////////
+///
+/// <summary>Sets the object's Extrusion Mode, a bitwise OR of flags defining how 
+/// segments are joined and extrusion ends are handled, and how normal vectors are 
+/// generated.</summary>
+/// \details Available tubing join styles are:
+/// [GLE_JN_RAW](@ref GLE_JN_RAW), 
+/// [GLE_JN_ANGLE](@ref GLE_JN_ANGLE),
+/// [GLE_JN_CUT](@ref GLE_JN_CUT) and
+/// [GLE_JN_ROUND](@ref GLE_JN_ROUND). [GLE_JN_MASK](@ref GLE_JN_MASK) can
+/// be used to mask off the bits that define the join style.
+///
+///  End cap production is controlled with the [GLE_JN_CAP](@ref GLE_JN_CAP) flag; if set, ends will be drawn at
+/// the ends of the extrusion.
+///
+///  There are three normal vector generation modes, as listed below:
+/// [GLE_NORM_FACET(@ref GLE_NORM_FACET),
+/// [GLE_NORM_EDGE](@ref GLE_NORM_EDGE), and
+/// [GLE_NORM_PATH_EDGE](@ref GLE_NORM_PATH_EDGE). [GLE_NORM_MASK](@ref GLE_NORM_MASK) can
+/// be used to mask off the relevant bits.
+///
+/// Finally, [GLE_CONTOUR_CLOSED](@ref GLE_CONTOUR_CLOSED) defines whether or not the last contour point
+/// is to be connected to the first, forming a closed cross-section.
+/// 
+/// Default:  [GLE_JN_ANGLE](@ref GLE_JN_ANGLE) | [GLE_JN_CAP](@ref GLE_JN_CAP) | 
+///	[GLE_NORM_FACET](@ref GLE_NORM_FACET) | [GLE_CONTOUR_CLOSED](@ref GLE_CONTOUR_CLOSED).
+///
+/// @param	mode <summary>The new Extrusion Mode.</summary>
+///
+/////////////////////////////////////////////////////////////////////////////////////
+void CgleBaseExtrusion::SetExtrusionMode(int mode)
+{
+	m_iExtrusionMode = mode;
+}
+//----------------------------------------------------------------------------
+/////////////////////////////////////////////////////////////////////////////////////
+///
+/// <summary>Returns the current extrusion mode.</summary>
+/// \details See the description of CgleBaseExtrusion::SetExtrusionMode for more information.
+///
+/// \retval	int
+///
+/////////////////////////////////////////////////////////////////////////////////////
+int CgleBaseExtrusion::GetExtrusionMode()  const
+{
+	return(m_iExtrusionMode);
+}
+//----------------------------------------------------------------------------
+/////////////////////////////////////////////////////////////////////////////////////
+///
+/// <summary>Select a texture mode.</summary>
+/// \details See [gleTexMode](@ref gleTexMode) for details.
+///
+/// Default: [GLE_TEXTURE_VERTEX_CYL](@ref GLE_TEXTURE_VERTEX_CYL).
+///
+/// @param	mode
+///
+/////////////////////////////////////////////////////////////////////////////////////
+void CgleBaseExtrusion::SetTextureMode(gleTexMode mode)
+{
+	m_TexMode = mode;
+}
+//----------------------------------------------------------------------------
+/////////////////////////////////////////////////////////////////////////////////////
+///
+/// <summary>Return the current [texture mode](@ref gleTexMode).</summary>
+/// \details
+///
+/// \retval	int
+///
+/////////////////////////////////////////////////////////////////////////////////////
+gleTexMode  CgleBaseExtrusion::GetTextureMode() const
+{
+	return(m_TexMode);
+}
+//----------------------------------------------------------------------------
+/////////////////////////////////////////////////////////////////////////////////////
+///
+/// <summary>This member function controls how the optional Color Array parameter in the draw functions is used. </summary>
+/// \details If UseLitMaterial is set high, color array values are used to generate ambient, diffuse and emmisive material
+/// values and glMaterial is called twice for each application of a color value. If UseLitMaterial is set low, the color array
+/// values are passed directly to glColor, which is called once for each color value. This arrangement allows the use of
+/// glColorMaterial, which can link a material parameter to subsequent glColor calls. This provides a faster alternative to
+/// the first option, without completely giving up lighting effects. A third alternative, the fastest, is to set UseLitMaterial
+/// low and disable lighting. The color array values are passed to glColor, but no shading is performed, and the results are
+/// usually poor.
+///
+/// Default: true.
+///
+/// @param	value
+///
+/////////////////////////////////////////////////////////////////////////////////////
+void  CgleBaseExtrusion::UseLitMaterial(bool value)
+{
+	m_bUseLitMaterial = value;
+}
+//----------------------------------------------------------------------------
+/////////////////////////////////////////////////////////////////////////////////////
+///
+/// <summary>Returns the current state of the UseLitMaterial member.</summary>
+/// \details
+///
+/// \retval	bool
+///
+/////////////////////////////////////////////////////////////////////////////////////
+bool CgleBaseExtrusion::IsUsingLitMaterial()  const
+{
+	return(m_bUseLitMaterial);
+}
+//----------------------------------------------------------------------------
+/////////////////////////////////////////////////////////////////////////////////////
+///
+/// <summary></summary>
+/// \details
+///
+/// @param	Up[3]
+///
+/////////////////////////////////////////////////////////////////////////////////////
+void CgleBaseExtrusion::LoadUpVector(double Up[3])
+{
+	if (m_ptrUp == NULL)
+		m_ptrUp = new double[3];
+
+	for (int i = 0; i < 3; i++)
+		m_ptrUp[i] = Up[i];
+}
+//----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
+/////////////////////////////////////////////////////////////////////////////////////
+///
+/// <summary></summary>
+/// \details
+///
+/// @param	Index
+/// @param	dX
+/// @param	dY
+///
+/////////////////////////////////////////////////////////////////////////////////////
+void CgleBaseExtrusion::LoadContourPoint(int Index, double dX, double dY)
+{
+
+	double alen, ax, ay;
+	m_ptrContours[Index][0] = m_dRadius * (dX);
+	m_ptrContours[Index][1] = m_dRadius * (dY);
+	if (Index != 0)
+	{
+		ax = m_ptrContours[Index][0] - m_ptrContours[Index - 1][0];
+		ay = m_ptrContours[Index][1] - m_ptrContours[Index - 1][1];
+		if (!((ax == 0.0) && (ay == 0.0)))
+			alen = sqrt(ax*ax + ay*ay);
+		else
+			alen = 0.0;
+		if (alen != 0)
+			alen = ((1.0) / (alen));
+
+		m_ptrCont_Norms[Index - 1][0] = (ay *= alen);
+		m_ptrCont_Norms[Index - 1][1] = -(ax *= alen);
+
+	}
+}
+//--------------------------------------------------------------------------
 void  CgleBaseExtrusion::PrepareGC()
 {
 	if (m_bTexEnabled)
@@ -94,76 +270,76 @@ void  CgleBaseExtrusion::PrepareGC()
 		_gle_gc->color_array = (float(*)[3])m_ptrColorArray;
 		_gle_gc->xform_array = m_ptrXforms;
 
-		switch (m_iTexMode & GLE_TEXTURE_STYLE_MASK)
+		switch (m_TexMode)
 		{
 
-			case GLE_TEXTURE_VERTEX_FLAT:
+			case gleTexMode::GLE_TEXTURE_VERTEX_FLAT:
 				_gle_gc->bgn_gen_texture = bgn_z_texgen;
 				_gle_gc->v3d_gen_texture = vertex_flat_texgen_v;
 				_gle_gc->n3d_gen_texture = 0x0;
 				break;
 
-			case GLE_TEXTURE_NORMAL_FLAT:
+			case gleTexMode::GLE_TEXTURE_NORMAL_FLAT:
 				_gle_gc->bgn_gen_texture = bgn_z_texgen;
 				_gle_gc->v3d_gen_texture = normal_flat_texgen_v;
 				_gle_gc->n3d_gen_texture = save_normal;
 				break;
 
-			case GLE_TEXTURE_VERTEX_MODEL_FLAT:
+			case gleTexMode::GLE_TEXTURE_VERTEX_MODEL_FLAT:
 				_gle_gc->bgn_gen_texture = bgn_z_texgen;
 				_gle_gc->v3d_gen_texture = vertex_flat_model_v;
 				_gle_gc->n3d_gen_texture = 0x0;
 				break;
 
-			case GLE_TEXTURE_NORMAL_MODEL_FLAT:
+			case gleTexMode::GLE_TEXTURE_NORMAL_MODEL_FLAT:
 				_gle_gc->bgn_gen_texture = bgn_z_texgen;
 				_gle_gc->v3d_gen_texture = normal_flat_model_v;
 				_gle_gc->n3d_gen_texture = 0x0;
 				break;
 
-			case GLE_TEXTURE_VERTEX_CYL:
+			case gleTexMode::GLE_TEXTURE_VERTEX_CYL:
 				_gle_gc->bgn_gen_texture = bgn_z_texgen;
 				_gle_gc->v3d_gen_texture = vertex_cylinder_texgen_v;
 				_gle_gc->n3d_gen_texture = 0x0;
 				break;
 
-			case GLE_TEXTURE_NORMAL_CYL:
+			case gleTexMode::GLE_TEXTURE_NORMAL_CYL:
 				_gle_gc->bgn_gen_texture = bgn_z_texgen;
 				_gle_gc->v3d_gen_texture = normal_cylinder_texgen_v;
 				_gle_gc->n3d_gen_texture = save_normal;
 				break;
 
-			case GLE_TEXTURE_VERTEX_MODEL_CYL:
+			case gleTexMode::GLE_TEXTURE_VERTEX_MODEL_CYL:
 				_gle_gc->bgn_gen_texture = bgn_z_texgen;
 				_gle_gc->v3d_gen_texture = vertex_cylinder_model_v;
 				_gle_gc->n3d_gen_texture = 0x0;
 				break;
 
-			case GLE_TEXTURE_NORMAL_MODEL_CYL:
+			case gleTexMode::GLE_TEXTURE_NORMAL_MODEL_CYL:
 				_gle_gc->bgn_gen_texture = bgn_z_texgen;
 				_gle_gc->v3d_gen_texture = normal_cylinder_model_v;
 				_gle_gc->n3d_gen_texture = 0x0;
 				break;
 
-			case GLE_TEXTURE_VERTEX_SPH:
+			case gleTexMode::GLE_TEXTURE_VERTEX_SPH:
 				_gle_gc->bgn_gen_texture = bgn_sphere_texgen;
 				_gle_gc->v3d_gen_texture = vertex_sphere_texgen_v;
 				_gle_gc->n3d_gen_texture = 0x0;
 				break;
 
-			case GLE_TEXTURE_NORMAL_SPH:
+			case gleTexMode::GLE_TEXTURE_NORMAL_SPH:
 				_gle_gc->bgn_gen_texture = bgn_sphere_texgen;
 				_gle_gc->v3d_gen_texture = normal_sphere_texgen_v;
 				_gle_gc->n3d_gen_texture = save_normal;
 				break;
 
-			case GLE_TEXTURE_VERTEX_MODEL_SPH:
+			case gleTexMode::GLE_TEXTURE_VERTEX_MODEL_SPH:
 				_gle_gc->bgn_gen_texture = bgn_sphere_texgen;
 				_gle_gc->v3d_gen_texture = vertex_sphere_model_v;
 				_gle_gc->n3d_gen_texture = 0x0;
 				break;
 
-			case GLE_TEXTURE_NORMAL_MODEL_SPH:
+			case gleTexMode::GLE_TEXTURE_NORMAL_MODEL_SPH:
 				_gle_gc->bgn_gen_texture = bgn_sphere_texgen;
 				_gle_gc->v3d_gen_texture = normal_sphere_model_v;
 				_gle_gc->n3d_gen_texture = 0x0;
@@ -193,70 +369,6 @@ void  CgleBaseExtrusion::PrepareGC()
 }
 
 //----------------------------------------------------------------------------
-void CgleBaseExtrusion::SetExtrusionMode(int style)
-{
-	m_iJoinStyle = style;
-}
-//----------------------------------------------------------------------------
-int CgleBaseExtrusion::GetExtrusionMode()  const
-{
-	return(m_iJoinStyle);
-}
-//----------------------------------------------------------------------------
-void CgleBaseExtrusion::SetTextureMode(int mode)
-{
-	m_iTexMode = mode;
-}
-//----------------------------------------------------------------------------
-int   CgleBaseExtrusion::GetTextureMode() const
-{
-	return(m_iTexMode);
-}
-//----------------------------------------------------------------------------
-void CgleBaseExtrusion::LoadUpVector(double Up[3])
-{
-	if (m_ptrUp == NULL)
-		m_ptrUp = new double[3];
-
-	for (int i = 0; i < 3; i++)
-		m_ptrUp[i] = Up[i];
-}
-//----------------------------------------------------------------------------
-void CgleBaseExtrusion::LoadContourPoint(int Index, double dX,
-	double dY)
-{
-
-	double alen, ax, ay;
-	m_ptrContours[Index][0] = m_dRadius * (dX);
-	m_ptrContours[Index][1] = m_dRadius * (dY);
-	if (Index != 0)
-	{
-		ax = m_ptrContours[Index][0] - m_ptrContours[Index - 1][0];
-		ay = m_ptrContours[Index][1] - m_ptrContours[Index - 1][1];
-		if (!((ax == 0.0) && (ay == 0.0)))
-			alen = sqrt(ax*ax + ay*ay);
-		else
-			alen = 0.0;
-		if (alen != 0)
-			alen = ((1.0) / (alen));
-
-		m_ptrCont_Norms[Index - 1][0] = (ay *= alen);
-		m_ptrCont_Norms[Index - 1][1] = -(ax *= alen);
-
-	}
-}
-//--------------------------------------------------------------------------
-void  CgleBaseExtrusion::UseLitMaterial(bool value)
-{
-	m_bUseLitMaterial = value;
-}
-//----------------------------------------------------------------------------
-bool CgleBaseExtrusion::IsUsingLitMaterial()  const
-{
-	return(m_bUseLitMaterial);
-}
-//----------------------------------------------------------------------------
-//----------------------------------------------------------------------------
 void CgleBaseExtrusion::DrawExtrusion(double Point_Array[][3],
 	float Color_Array[][3], bool bTextured)
 {
@@ -275,7 +387,7 @@ void CgleBaseExtrusion::DrawExtrusion(double Point_Array[][3],
 
 	PrepareGC();
 
-	switch (m_iJoinStyle & GLE_JN_MASK)
+	switch (m_iExtrusionMode & GLE_JN_MASK)
 	{
 		case GLE_JN_RAW:
 			(void)Extrusion_Raw_Join();
@@ -324,7 +436,7 @@ void CgleBaseExtrusion::Draw_Fillet_Triangle_N_Norms (double va[3],
 	if (!m_bTexEnabled)
 	{
 		glBegin (GL_TRIANGLE_STRIP);
-		if (m_iJoinStyle & GLE_NORM_FACET)
+		if (m_iExtrusionMode & GLE_NORM_FACET)
 		{
 			glNormal3dv(na);
 			if (face)
@@ -366,7 +478,7 @@ void CgleBaseExtrusion::Draw_Fillet_Triangle_N_Norms (double va[3],
 	{
 		BGNTMESH (-5, 0.0);
 
-		if (m_iJoinStyle & GLE_NORM_FACET)
+		if (m_iExtrusionMode & GLE_NORM_FACET)
 		{
 			N3D (na);
 
@@ -424,7 +536,7 @@ void CgleBaseExtrusion::Draw_Segment_Edge_N (double front_contour[][3],
 			glVertex3dv(back_contour[j]);
 		}
 
-		if  (m_iJoinStyle & GLE_CONTOUR_CLOSED)
+		if  (m_iExtrusionMode & GLE_CONTOUR_CLOSED)
 
 		{
 			// connect back up to first point of contour
@@ -445,7 +557,7 @@ void CgleBaseExtrusion::Draw_Segment_Edge_N (double front_contour[][3],
 			V3D (back_contour[j], j, BACK);
 		}
 
-		if  (m_iJoinStyle & GLE_CONTOUR_CLOSED)
+		if  (m_iExtrusionMode & GLE_CONTOUR_CLOSED)
 		{
 			// connect back up to first point of contour
 			N3D (norm_cont[0]);
@@ -479,7 +591,7 @@ void CgleBaseExtrusion::Draw_Segment_C_And_Edge_N (double front_contour[][3],
 			glVertex3dv(back_contour[j]);
 		}
 
-		if (m_iJoinStyle & GLE_CONTOUR_CLOSED)
+		if (m_iExtrusionMode & GLE_CONTOUR_CLOSED)
 
 		{
 			// connect back up to first point of contour
@@ -509,7 +621,7 @@ void CgleBaseExtrusion::Draw_Segment_C_And_Edge_N (double front_contour[][3],
 			V3D (back_contour[j], j, BACK);
 		}
 
-		if (m_iJoinStyle & GLE_CONTOUR_CLOSED)
+		if (m_iExtrusionMode & GLE_CONTOUR_CLOSED)
 		{
 			// connect back up to first point of contour
 			SetColor(&((float(*)[3])m_ptrColorArray)[m_iINext - 1][0]);
@@ -542,7 +654,7 @@ void CgleBaseExtrusion::Draw_Segment_Facet_N (double front_contour[][3],
 			glVertex3dv(back_contour[j+1]);
 		}
 
-		if (m_iJoinStyle & GLE_CONTOUR_CLOSED)
+		if (m_iExtrusionMode & GLE_CONTOUR_CLOSED)
 		{
 			// connect back up to first point of contour
 			glNormal3dv(norm_cont[m_iContourPoints-1]);
@@ -568,7 +680,7 @@ void CgleBaseExtrusion::Draw_Segment_Facet_N (double front_contour[][3],
 			V3D (back_contour[j+1], j+1, BACK);
 		}
 
-		if (m_iJoinStyle & GLE_CONTOUR_CLOSED)
+		if (m_iExtrusionMode & GLE_CONTOUR_CLOSED)
 		{
 			// connect back up to first point of contour
 			N3D (norm_cont[m_iContourPoints-1]);
@@ -623,7 +735,7 @@ void CgleBaseExtrusion::Draw_Segment_C_And_Facet_N(double front_contour[][3],
 			glVertex3dv(back_contour[j+1]);
 		}
 
-		if (m_iJoinStyle & GLE_CONTOUR_CLOSED)
+		if (m_iExtrusionMode & GLE_CONTOUR_CLOSED)
 
 		{
 			// connect back up to first point of contour
@@ -670,7 +782,7 @@ void CgleBaseExtrusion::Draw_Segment_C_And_Facet_N(double front_contour[][3],
 			V3D (back_contour[j+1], j+1, BACK);
 		}
 
-		if (m_iJoinStyle & GLE_CONTOUR_CLOSED)
+		if (m_iExtrusionMode & GLE_CONTOUR_CLOSED)
 		{
 			// connect back up to first point of contour
 			SetColor(&((float(*)[3])m_ptrColorArray)[m_iINext - 1][0]);
@@ -716,7 +828,7 @@ void CgleBaseExtrusion::Draw_Binorm_Segment_Edge_N (double front_contour[][3],
 			glVertex3dv(back_contour[j]);
 		}
 
-		if (m_iJoinStyle & GLE_CONTOUR_CLOSED)
+		if (m_iExtrusionMode & GLE_CONTOUR_CLOSED)
 
 		{
 			// connect back up to first point of contour
@@ -739,7 +851,7 @@ void CgleBaseExtrusion::Draw_Binorm_Segment_Edge_N (double front_contour[][3],
 			V3D (back_contour[j], j, BACK);
 		}
 
-		if (m_iJoinStyle & GLE_CONTOUR_CLOSED)
+		if (m_iExtrusionMode & GLE_CONTOUR_CLOSED)
 		{
 			// connect back up to first point of contour
 			N3D (front_norm[0]);
@@ -771,7 +883,7 @@ void CgleBaseExtrusion::Draw_Binorm_Segment_C_And_Edge_N(double front_contour[][
 			glVertex3dv(back_contour[j]);
 		}
 
-		if (m_iJoinStyle & GLE_CONTOUR_CLOSED)
+		if (m_iExtrusionMode & GLE_CONTOUR_CLOSED)
 
 		{
 			// connect back up to first point of contour
@@ -800,7 +912,7 @@ void CgleBaseExtrusion::Draw_Binorm_Segment_C_And_Edge_N(double front_contour[][
 			V3D (back_contour[j], j, BACK);
 		}
 
-		if (m_iJoinStyle & GLE_CONTOUR_CLOSED)
+		if (m_iExtrusionMode & GLE_CONTOUR_CLOSED)
 		{
 			// connect back up to first point of contour
 			SetColor(&((float(*)[3])m_ptrColorArray)[m_iINext - 1][0]);
@@ -845,7 +957,7 @@ void CgleBaseExtrusion::Draw_Binorm_Segment_Facet_N (double front_contour[][3],
 			glVertex3dv(back_contour[j+1]);
 		}
 
-		if (m_iJoinStyle & GLE_CONTOUR_CLOSED)
+		if (m_iExtrusionMode & GLE_CONTOUR_CLOSED)
 
 		{
 			// connect back up to first point of contour
@@ -882,7 +994,7 @@ void CgleBaseExtrusion::Draw_Binorm_Segment_Facet_N (double front_contour[][3],
 			V3D (back_contour[j+1], j+1, BACK);
 		}
 
-		if (m_iJoinStyle & GLE_CONTOUR_CLOSED)
+		if (m_iExtrusionMode & GLE_CONTOUR_CLOSED)
 		{
 			// connect back up to first point of contour
 			N3D (front_norm[m_iContourPoints-1]);
@@ -935,7 +1047,7 @@ void CgleBaseExtrusion::Draw_Binorm_Segment_C_And_Facet_N(
 			glVertex3dv(back_contour[j+1]);
 		}
 
-		if (m_iJoinStyle & GLE_CONTOUR_CLOSED)
+		if (m_iExtrusionMode & GLE_CONTOUR_CLOSED)
 		{
 			// connect back up to first point of contour
 			SetColor(&((float(*)[3])m_ptrColorArray)[m_iINext - 1][0]);
@@ -980,7 +1092,7 @@ void CgleBaseExtrusion::Draw_Binorm_Segment_C_And_Facet_N(
 			V3D (back_contour[j+1], j+1, BACK);
 		}
 
-		if (m_iJoinStyle & GLE_CONTOUR_CLOSED)
+		if (m_iExtrusionMode & GLE_CONTOUR_CLOSED)
 		{
 			// connect back up to first point of contour
 			SetColor(&((float(*)[3])m_ptrColorArray)[m_iINext - 1][0]);
@@ -1044,7 +1156,7 @@ void CgleBaseExtrusion::Draw_Fillets_And_Join_N_Norms( int ncp,
 	iloop = 0;
 	if (!is_trimmed[0])
 	{
-		if (m_iJoinStyle & GLE_JN_CUT)
+		if (m_iExtrusionMode & GLE_JN_CUT)
 		{
 			VEC_SUM (tmp_vec, trimmed_loop[0], bis_vector);
 			INNERSECT (sect,
@@ -1081,7 +1193,7 @@ void CgleBaseExtrusion::Draw_Fillets_And_Join_N_Norms( int ncp,
 	// Start walking around the end cap.  Every time the end loop is
 	// trimmed, we know we'll need to draw a fillet triangle.  In
 	// addition, after every pair of visibility changes, we draw a cap.
-	if (m_iJoinStyle & GLE_CONTOUR_CLOSED)
+	if (m_iExtrusionMode & GLE_CONTOUR_CLOSED)
 
 	{
 		istop = ncp;
@@ -1185,7 +1297,7 @@ void CgleBaseExtrusion::Draw_Fillets_And_Join_N_Norms( int ncp,
 
 			// OK, maybe phong normals are wrong, but at least facet
 			// normals will come out OK.
-			if (m_iJoinStyle & GLE_NORM_FACET)
+			if (m_iExtrusionMode & GLE_NORM_FACET)
 
 			{
 				VEC_COPY ( (&FNNormLoop[3*iloop]), normals[icnt_prev]);
@@ -1219,7 +1331,7 @@ void CgleBaseExtrusion::Draw_Fillets_And_Join_N_Norms( int ncp,
 	if ((!is_trimmed[icnt]) && (iloop >= 2))
 	{
 
-		if (m_iJoinStyle & GLE_JN_CUT)
+		if (m_iExtrusionMode & GLE_JN_CUT)
 
 		{
 			VEC_SUM (tmp_vec, trimmed_loop[icnt], bis_vector);
@@ -1373,7 +1485,7 @@ void CgleBaseExtrusion::Draw_Round_Style_Cap_Callback (int ncp,double cap[][3],
 
 		if (norms != NULL)
 		{
-			if (((CgleBaseExtrusion*)clOwner)->m_iJoinStyle & GLE_NORM_FACET)
+			if (((CgleBaseExtrusion*)clOwner)->m_iExtrusionMode & GLE_NORM_FACET)
 
 			{
 				for (j=0; j<ncp-1; j++)
@@ -1423,7 +1535,7 @@ void CgleBaseExtrusion::Draw_Round_Style_Cap_Callback (int ncp,double cap[][3],
 
 		// OK, now render it all
 
-		if (((CgleBaseExtrusion*)clOwner)->m_iJoinStyle & GLE_NORM_FACET)
+		if (((CgleBaseExtrusion*)clOwner)->m_iExtrusionMode & GLE_NORM_FACET)
 		{
 
 			((CgleBaseExtrusion*)clOwner)->Draw_Binorm_Segment_Facet_N ((gleVector *) next_contour,
@@ -1645,7 +1757,7 @@ void CgleBaseExtrusion::Draw_Raw_Segment_C_And_Facet_N ()
 
 		}
 
-		if (m_iJoinStyle & GLE_CONTOUR_CLOSED)
+		if (m_iExtrusionMode & GLE_CONTOUR_CLOSED)
 
 		{
 			// connect back up to first point of m_ptrContours
@@ -1687,7 +1799,7 @@ void CgleBaseExtrusion::Draw_Raw_Segment_C_And_Facet_N ()
 
 		// draw the endcaps, if the join style calls for it
 
-		if (m_iJoinStyle & GLE_JN_CAP)
+		if (m_iExtrusionMode & GLE_JN_CAP)
 
 		{
 
@@ -1755,7 +1867,7 @@ void CgleBaseExtrusion::Draw_Raw_Segment_C_And_Facet_N ()
 			V3D (point, j+1, BACK);
 		}
 
-		if (m_iJoinStyle & GLE_CONTOUR_CLOSED)
+		if (m_iExtrusionMode & GLE_CONTOUR_CLOSED)
 		{
 			// connect back up to first point of contour
 			point [0] = m_ptrContours[m_iContourPoints-1][0];
@@ -1795,7 +1907,7 @@ void CgleBaseExtrusion::Draw_Raw_Segment_C_And_Facet_N ()
 		ENDTMESH ();
 
 		// draw the endcaps, if the join style calls for it
-		if (m_iJoinStyle & GLE_JN_CAP)
+		if (m_iExtrusionMode & GLE_JN_CAP)
 		{
 
 			// draw the front cap
@@ -1860,7 +1972,7 @@ void CgleBaseExtrusion::Draw_Raw_Segment_Facet_N ()
 			glVertex3dv(point);
 		}
 
-		if (m_iJoinStyle & GLE_CONTOUR_CLOSED)
+		if (m_iExtrusionMode & GLE_CONTOUR_CLOSED)
 
 		{
 			// connect back up to first point of m_ptrContours
@@ -1888,7 +2000,7 @@ void CgleBaseExtrusion::Draw_Raw_Segment_Facet_N ()
 		glEnd();
 
 		// draw the endcaps, if the join style calls for it
-		if (m_iJoinStyle & GLE_JN_CAP)
+		if (m_iExtrusionMode & GLE_JN_CAP)
 
 		{
 
@@ -1940,7 +2052,7 @@ void CgleBaseExtrusion::Draw_Raw_Segment_Facet_N ()
 			V3D (point, j+1, BACK);
 		}
 
-		if (m_iJoinStyle & GLE_CONTOUR_CLOSED)
+		if (m_iExtrusionMode & GLE_CONTOUR_CLOSED)
 		{
 			//connect back up to first point of m_ptrContours
 			norm [0] = m_ptrCont_Norms[m_iContourPoints-1][0];
@@ -1967,7 +2079,7 @@ void CgleBaseExtrusion::Draw_Raw_Segment_Facet_N ()
 		ENDTMESH ();
 
 		// draw the endcaps, if the join style calls for it
-		if (m_iJoinStyle & GLE_JN_CAP)
+		if (m_iExtrusionMode & GLE_JN_CAP)
 		{
 			// draw the front cap
 			norm [0] = norm [1] = 0.0;
@@ -2024,7 +2136,7 @@ void CgleBaseExtrusion::Draw_Raw_Segment_C_And_Edge_N ()
 			glVertex3dv(point);
 		}
 
-		if (m_iJoinStyle & GLE_CONTOUR_CLOSED)
+		if (m_iExtrusionMode & GLE_CONTOUR_CLOSED)
 
 		{
 			// connect back up to first point of m_ptrContours
@@ -2052,7 +2164,7 @@ void CgleBaseExtrusion::Draw_Raw_Segment_C_And_Edge_N ()
 		glEnd();
 
 		// draw the endcaps, if the join style calls for it
-		if (m_iJoinStyle & GLE_JN_CAP)
+		if (m_iExtrusionMode & GLE_JN_CAP)
 
 		{
 			// draw the front cap
@@ -2101,7 +2213,7 @@ void CgleBaseExtrusion::Draw_Raw_Segment_C_And_Edge_N ()
 			V3D (point, j, BACK);
 		}
 
-		if (m_iJoinStyle & GLE_CONTOUR_CLOSED)
+		if (m_iExtrusionMode & GLE_CONTOUR_CLOSED)
 		{
 			// connect back up to first point of m_ptrContours
 			SetColor (&((float(*)[3])m_ptrColorArray)[m_iINext-1][0]);
@@ -2128,7 +2240,7 @@ void CgleBaseExtrusion::Draw_Raw_Segment_C_And_Edge_N ()
 		ENDTMESH ();
 
 		// draw the endcaps, if the join style calls for it
-		if (m_iJoinStyle & GLE_JN_CAP)
+		if (m_iExtrusionMode & GLE_JN_CAP)
 		{
 			// draw the front cap
 			SetColor (&((float(*)[3])m_ptrColorArray)[m_iINext-1][0]);
@@ -2182,7 +2294,7 @@ void CgleBaseExtrusion::Draw_Raw_Segment_Edge_N()
 			glVertex3dv(point);
 		}
 
-		if (m_iJoinStyle & GLE_CONTOUR_CLOSED)
+		if (m_iExtrusionMode & GLE_CONTOUR_CLOSED)
 		{
 			// connect back up to first point of m_ptrContours
 			norm [0] = m_ptrCont_Norms[0][0];
@@ -2202,7 +2314,7 @@ void CgleBaseExtrusion::Draw_Raw_Segment_Edge_N()
 		glEnd();
 
 		// draw the endcaps, if the join style calls for it
-		if (m_iJoinStyle & GLE_JN_CAP)
+		if (m_iExtrusionMode & GLE_JN_CAP)
 
 		{
 			// draw the front cap
@@ -2242,7 +2354,7 @@ void CgleBaseExtrusion::Draw_Raw_Segment_Edge_N()
 			point [2] = - m_dLen;
 			V3D (point, j, BACK);
 		}
-		if (m_iJoinStyle & GLE_CONTOUR_CLOSED)
+		if (m_iExtrusionMode & GLE_CONTOUR_CLOSED)
 		{
 			// connect back up to first point of m_ptrContours
 			norm [0] = m_ptrCont_Norms[0][0];
@@ -2262,7 +2374,7 @@ void CgleBaseExtrusion::Draw_Raw_Segment_Edge_N()
 		ENDTMESH ();
 
 		// draw the endcaps, if the join style calls for it
-		if (m_iJoinStyle & GLE_JN_CAP)
+		if (m_iExtrusionMode & GLE_JN_CAP)
 		{
 
 			// draw the front cap
@@ -2471,7 +2583,7 @@ void CgleBaseExtrusion::Extrusion_Round_Or_Cut_Join()
 	// create a local, block scope copy of of the join style.
 	// this will alleviate wasted cycles and register write-backs
 	// choose the right callback, depending on the choosen join style
-	if (m_iJoinStyle & GLE_JN_CUT)
+	if (m_iExtrusionMode & GLE_JN_CUT)
 	{
 		join_style_is_cut = TRUE;
 		cap_callback =  Draw_Cut_Style_Cap_Callback;
@@ -2797,7 +2909,7 @@ void CgleBaseExtrusion::Extrusion_Round_Or_Cut_Join()
 		{
 			if (m_ptrColorArray == NULL)
 			{
-				if (m_iJoinStyle & GLE_NORM_FACET)
+				if (m_iExtrusionMode & GLE_NORM_FACET)
 					Draw_Segment_Facet_N (  (gleVector *) front_loop,
 					(gleVector *) back_loop,
 					(gleVector *) norm_loop);
@@ -2808,7 +2920,7 @@ void CgleBaseExtrusion::Extrusion_Round_Or_Cut_Join()
 			}
 			else
 			{
-				if (m_iJoinStyle & GLE_NORM_FACET)
+				if (m_iExtrusionMode & GLE_NORM_FACET)
 					Draw_Segment_C_And_Facet_N ((gleVector *) front_loop,
 					(gleVector *) back_loop,
 					(gleVector *) norm_loop);
@@ -2823,7 +2935,7 @@ void CgleBaseExtrusion::Extrusion_Round_Or_Cut_Join()
 		{
 			if ((float*)m_ptrColorArray == NULL)
 			{
-				if (m_iJoinStyle & GLE_NORM_FACET)
+				if (m_iExtrusionMode & GLE_NORM_FACET)
 					Draw_Binorm_Segment_Facet_N ( (gleVector *) front_loop,
 					(gleVector *) back_loop,
 					(gleVector *) front_norm,
@@ -2837,7 +2949,7 @@ void CgleBaseExtrusion::Extrusion_Round_Or_Cut_Join()
 			}
 			else
 			{
-				if (m_iJoinStyle & GLE_NORM_FACET)
+				if (m_iExtrusionMode & GLE_NORM_FACET)
 					Draw_Binorm_Segment_C_And_Facet_N ((gleVector *) front_loop,
 					(gleVector *) back_loop,
 					(gleVector *) front_norm,
@@ -2861,7 +2973,7 @@ void CgleBaseExtrusion::Extrusion_Round_Or_Cut_Join()
 			tmp_cap_callback = cap_callback;
 			cap_callback = Null_Cap_Callback;
 
-			if (m_iJoinStyle & GLE_JN_CAP)
+			if (m_iExtrusionMode & GLE_JN_CAP)
 			{
 				if (m_ptrColorArray != NULL)
 					SetColor (m_ptrColorArray[m_iINext-1]);
@@ -2908,7 +3020,7 @@ void CgleBaseExtrusion::Extrusion_Round_Or_Cut_Join()
 		// v^v^v^v^v^v^v^v^v  BEGIN END CAPS v^v^v^v^v^v^v^v^v^v^v^v
 		if (m_iINext == m_iPoints-2)
 		{
-			if (m_iJoinStyle & GLE_JN_CAP)
+			if (m_iExtrusionMode & GLE_JN_CAP)
 			{
 				if (m_ptrColorArray != NULL)
 					SetColor (&((float(*)[3])m_ptrColorArray)[m_iINext][0]);
@@ -3114,7 +3226,7 @@ void CgleBaseExtrusion::Extrusion_Angle_Join ()
 			// look good: Without this, segmentation artifacts show up
 			// under lighting.
 			///
-			if (m_iJoinStyle & GLE_NORM_PATH_EDGE)
+			if (m_iExtrusionMode & GLE_NORM_PATH_EDGE)
 
 			{
 				// Hmm, if no affine xforms, then we haven't yet set
@@ -3205,7 +3317,7 @@ void CgleBaseExtrusion::Extrusion_Angle_Join ()
 
 		// if end caps are required, draw them. But don't draw any
 		// but the very first and last caps
-		if (m_iJoinStyle & GLE_JN_CAP)
+		if (m_iExtrusionMode & GLE_JN_CAP)
 
 		{
 			if (first_time)
@@ -3237,12 +3349,12 @@ void CgleBaseExtrusion::Extrusion_Angle_Join ()
 
 		m_dLen = len_seg;
 
-		if ((m_ptrXforms == NULL) && (!(m_iJoinStyle & GLE_NORM_PATH_EDGE)))
+		if ((m_ptrXforms == NULL) && (!(m_iExtrusionMode & GLE_NORM_PATH_EDGE)))
 
 		{
 			if (m_ptrColorArray == NULL)
 			{
-				if (m_iJoinStyle & GLE_NORM_FACET)
+				if (m_iExtrusionMode & GLE_NORM_FACET)
 					Draw_Segment_Facet_N ((gleVector *) front_loop,
 					(gleVector *) back_loop,
 					(gleVector *) norm_loop);
@@ -3254,7 +3366,7 @@ void CgleBaseExtrusion::Extrusion_Angle_Join ()
 			else
 			{
 
-				if (m_iJoinStyle & GLE_NORM_FACET)
+				if (m_iExtrusionMode & GLE_NORM_FACET)
 					Draw_Segment_C_And_Facet_N ((gleVector *) front_loop,
 					(gleVector *) back_loop,
 					(gleVector *) norm_loop);
@@ -3269,7 +3381,7 @@ void CgleBaseExtrusion::Extrusion_Angle_Join ()
 			if (m_ptrColorArray == NULL)
 			{
 
-				if (m_iJoinStyle & GLE_NORM_FACET)
+				if (m_iExtrusionMode & GLE_NORM_FACET)
 					Draw_Binorm_Segment_Facet_N ((gleVector *) front_loop,
 					(gleVector *) back_loop,
 					(gleVector *) front_norm,
@@ -3283,7 +3395,7 @@ void CgleBaseExtrusion::Extrusion_Angle_Join ()
 			else
 			{
 
-				if (m_iJoinStyle & GLE_NORM_FACET)
+				if (m_iExtrusionMode & GLE_NORM_FACET)
 					Draw_Binorm_Segment_C_And_Facet_N ((gleVector *) front_loop,
 					(gleVector *) back_loop,
 					(gleVector *) front_norm,
@@ -3422,7 +3534,7 @@ void CgleBaseExtrusion::Extrusion_Raw_Join()
 		{
 			if (no_cols)
 			{
-				if (m_iJoinStyle & GLE_NORM_FACET)
+				if (m_iExtrusionMode & GLE_NORM_FACET)
 					Draw_Raw_Segment_Facet_N();
 
 				else
@@ -3430,7 +3542,7 @@ void CgleBaseExtrusion::Extrusion_Raw_Join()
 			}
 			else
 			{
-				if (m_iJoinStyle & GLE_NORM_FACET)
+				if (m_iExtrusionMode & GLE_NORM_FACET)
 					Draw_Raw_Segment_C_And_Facet_N();
 
 				else
@@ -3459,7 +3571,7 @@ void CgleBaseExtrusion::Extrusion_Raw_Join()
 			if (no_cols)
 			{
 
-				if (m_iJoinStyle & GLE_NORM_FACET)
+				if (m_iExtrusionMode & GLE_NORM_FACET)
 					Draw_Binorm_Segment_Facet_N((double(*)[3]) front_loop,
 					(double(*)[3]) back_loop,
 						(double(*)[3]) front_norm,
@@ -3469,7 +3581,7 @@ void CgleBaseExtrusion::Extrusion_Raw_Join()
 					(double(*)[3]) back_loop,
 						(double(*)[3]) front_norm,
 						(double(*)[3]) back_norm);
-				if (m_iJoinStyle & GLE_JN_CAP)
+				if (m_iExtrusionMode & GLE_JN_CAP)
 
 				{
 					nrmv[2] = 1.0;
@@ -3483,7 +3595,7 @@ void CgleBaseExtrusion::Extrusion_Raw_Join()
 			else
 			{
 
-				if (m_iJoinStyle & GLE_NORM_FACET)
+				if (m_iExtrusionMode & GLE_NORM_FACET)
 					Draw_Binorm_Segment_C_And_Facet_N((double(*)[3]) front_loop,
 					(double(*)[3]) back_loop,
 						(double(*)[3]) front_norm,
@@ -3494,7 +3606,7 @@ void CgleBaseExtrusion::Extrusion_Raw_Join()
 						(double(*)[3]) front_norm,
 						(double(*)[3]) back_norm);
 
-				if (m_iJoinStyle & GLE_JN_CAP)
+				if (m_iExtrusionMode & GLE_JN_CAP)
 
 				{
 					SetColor(&((float(*)[3])m_ptrColorArray)[m_iINext - 1][0]);
@@ -3528,3 +3640,4 @@ void CgleBaseExtrusion::Extrusion_Raw_Join()
 
 	}
 }
+//----------------------------------------------------------------------------
