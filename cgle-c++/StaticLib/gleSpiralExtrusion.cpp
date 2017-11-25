@@ -2,7 +2,7 @@
 *									     GLE32 Extrusion Library							*
 *							Copyright© 2000 - 2017 by Dave Richards	 			*
 *										  All Rights Reserved.							*
-*												Ver 5.0									*
+*												Ver 6.0									*
 *																				       		*
 *											HISTORY:										*
 *									Linas Vepstas 1990 - 1997							*
@@ -55,7 +55,7 @@ CgleSpiralExtrusion::CgleSpiralExtrusion(int Points, double StartXForm[2][3], in
 	SetExtrusionMode(GLE_JN_CAP | GLE_CONTOUR_CLOSED | GLE_NORM_PATH_EDGE
 		| GLE_JN_ROUND);
 
-	SetTextureMode(GLE_TEXTURE_NORMAL_MODEL_CYL);
+	SetTextureMode(gleTexMode::GLE_TEXTURE_NORMAL_MODEL_CYL);
 	if (StartXForm != NULL)
 	{
 		for (int i = 0; i < 2; i++)

@@ -2,7 +2,7 @@
 *									     GLE32 Extrusion Library							*
 *							Copyright© 2000 - 2017 by Dave Richards	 			*
 *										  All Rights Reserved.							*
-*												Ver 5.0									*
+*												Ver 6.0									*
 *																				       		*
 *											HISTORY:										*
 *									Linas Vepstas 1990 - 1997							*
@@ -13,32 +13,20 @@
 
 #pragma once
 
-
-//class CgleBaseExtrusion;
-
-// some types
-typedef double gleAffine[2][3];
-typedef double gleVector[3];
-typedef double gleContourVector[2];
-typedef float gleColor[3];
+#include "ExtrusionLib.h"
 
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
 #endif
 
-typedef float gleColor[3];
-typedef double gleTwoVec[2];
+using gleTwoVec =  double[2];
 
 #define __ROUND_TESS_PIECES 5
 
 
 void CreateGC();
 void DestroyGC();
-
-//void AddItemToList(CgleBaseExtrusion* object);
-//void RemoveItemFromList(CgleBaseExtrusion* object);
-//void PurgeList();
 
 void SetColor(float color[3]);
 
@@ -59,7 +47,7 @@ void vertex_sphere_model_v (double *v, int jcnt, int which_end);
 void normal_sphere_model_v (double *v, int jcnt, int which_end);
 
 
-typedef struct gleGC
+using gleGC = struct
 {
 
    void (*bgn_gen_texture) (int, double);
@@ -89,7 +77,7 @@ typedef struct gleGC
    double prev_x;
    double prev_y;
 
-} gleGC;
+};
 
 
 // These are used to convey info about topography to the

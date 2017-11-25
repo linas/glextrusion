@@ -2,7 +2,7 @@
 *									     GLE32 Extrusion Library							*
 *							Copyright© 2000 - 2017 by Dave Richards	 			*
 *										  All Rights Reserved.							*
-*												Ver 5.0									*
+*												Ver 6.0									*
 *																				       		*
 *											HISTORY:										*
 *									Linas Vepstas 1990 - 1997							*
@@ -28,7 +28,7 @@ CgleScrew::CgleScrew(int Points, int ContourPoints, double Radius, double Twist)
 																						| GLE_JN_ANGLE);
 
 
-	SetTextureMode(GLE_TEXTURE_VERTEX_CYL);
+	SetTextureMode(gleTexMode::GLE_TEXTURE_VERTEX_CYL);
 	FTwist = Twist;
 	m_ptrPath = new gleVector[Points];
 	m_ptrTwarr = new double[Points];
