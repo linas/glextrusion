@@ -2,7 +2,7 @@
 *									     GLE32 Extrusion Library							*
 *							Copyright© 2000 - 2017 by Dave Richards	 			*
 *										  All Rights Reserved.							*
-*												Ver 5.0									*
+*												Ver 6.0									*
 *																				       		*
 *											HISTORY:										*
 *									Linas Vepstas 1990 - 1997							*
@@ -27,7 +27,7 @@ CgleIBeam::CgleIBeam(int Points, double Radius) : CgleBaseExtrusion(Points, 12, 
 	SetExtrusionMode(GLE_JN_CAP | GLE_CONTOUR_CLOSED | GLE_NORM_FACET |
 																			GLE_JN_ANGLE);
 
-	SetTextureMode(GLE_TEXTURE_NORMAL_MODEL_FLAT);
+	SetTextureMode(gleTexMode::GLE_TEXTURE_NORMAL_MODEL_FLAT);
 
 	LoadContourPoint(0, 1.0, 1.0);
 	LoadContourPoint(1, -1.0, 1.0);

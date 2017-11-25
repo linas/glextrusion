@@ -2,7 +2,7 @@
 *									     GLE32 Extrusion Library							*
 *							Copyright© 2000 - 2017 by Dave Richards	 			*
 *										  All Rights Reserved.							*
-*												Ver 5.0									*
+*												Ver 6.0									*
 *																				       		*
 *											HISTORY:										*
 *									Linas Vepstas 1990 - 1997							*
@@ -33,7 +33,7 @@ CgleConeExtrusion::CgleConeExtrusion(int Points, int Facets) :
 
 	m_ptrXforms = new gleAffine[m_iPoints];
 	m_ptrUp = new double[3];
-	SetTextureMode(GLE_TEXTURE_VERTEX_CYL);
+	SetTextureMode(gleTexMode::GLE_TEXTURE_VERTEX_CYL);
 }
 //----------------------------------------------------------------------------
 CgleConeExtrusion::~CgleConeExtrusion()
@@ -129,7 +129,7 @@ void  CgleConeExtrusion::Gen_PolyCone(double point_array[][3], float color_array
 	}
 
 	// save the current join style
-	saved_style = m_iJoinStyle;//extrusion_join_style;
+	saved_style = m_iExtrusionMode;//extrusion_join_style;
 	SetExtrusionMode(GLE_CONTOUR_CLOSED | saved_style);
 
 	CgleBaseExtrusion::DrawExtrusion(point_array, color_array, bTextured);
