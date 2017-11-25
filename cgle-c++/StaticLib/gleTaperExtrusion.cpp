@@ -2,7 +2,7 @@
 *									     GLE32 Extrusion Library							*
 *							Copyright© 2000 - 2017 by Dave Richards	 			*
 *										  All Rights Reserved.							*
-*												Ver 5.0									*
+*												Ver 6.0									*
 *																				       		*
 *											HISTORY:										*
 *									Linas Vepstas 1990 - 1997							*
@@ -29,7 +29,7 @@ CgleTaperExtrusion::CgleTaperExtrusion(int Points,
 	SetExtrusionMode(GLE_JN_CAP | GLE_CONTOUR_CLOSED | GLE_NORM_FACET |
 		GLE_JN_ROUND);
 
-	SetTextureMode(GLE_TEXTURE_NORMAL_MODEL_CYL);
+	SetTextureMode(gleTexMode::GLE_TEXTURE_NORMAL_MODEL_CYL);
 
 	FTwist = Twist;
 	m_ptrPath = new gleVector[Points];

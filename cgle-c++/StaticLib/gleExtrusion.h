@@ -2,7 +2,7 @@
 *									     GLE32 Extrusion Library                                     *
 *							Copyright© 2000 - 2017 by Dave Richards                       *
 *										  All Rights Reserved.                                          *
-*												Ver 5.0									*
+*												Ver 6.0									*
 *																				       		*
 *											HISTORY:										*
 *									Linas Vepstas 1990 - 1997							*
@@ -15,6 +15,17 @@
 
 
 //----------------------------------------------------------------------------
+/////////////////////////////////////////////////////////////////////////////////////
+///
+/// <summary></summary>
+/// \details Note that as with other classes that allow the user to define the extrusion's 
+/// cross-sectional shape, the inherited function CgleBaseExtrusion::LoadContourPoint is
+/// re-declared as public; if it weren't, there would be no way to define the cross-section.
+/// Doxygen unfortunately insists on ignoring the 'using' keyword, and so erroneously insists
+/// LoadContourPoint is still protected.
+///
+///
+/////////////////////////////////////////////////////////////////////////////////////
 class CgleExtrusion : public CgleBaseExtrusion
 {
 
@@ -33,7 +44,18 @@ public:
 	CgleExtrusion(int Points, int ContourPoints, double  Radius);
 	virtual ~CgleExtrusion();
 
-	/// \public
+/////////////////////////////////////////////////////////////////////////////////////
+/// \public
+/// <summary>hjgj</summary>
+/// \details
+///
+/// @param	Index
+/// @param	X
+/// @param	Y
+///
+/// \retval		void
+///
+/////////////////////////////////////////////////////////////////////////////////////
 	using CgleBaseExtrusion::LoadContourPoint;	// redeclare as public
 
 
