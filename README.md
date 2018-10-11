@@ -80,7 +80,7 @@ attention to the short program at the end: trying to
 compile it by hand will give you a good idea on why
 it failed.
 
-===Flags that can be supplied to `./configure`:
+### Flags that can be supplied to `./configure`:
 
 `--enable-lenient-tess`
 If you have a tesselator that is happy with anything,
@@ -114,7 +114,7 @@ output!
 
 More information about building, as well as this package,
 can be found in the
-[doc](https://github.com/linas/glextrusion/tree/master/doc/html/index.html) directory.
+[doc](https://github.com/linas/glextrusion/master/doc/html/index.html) directory.
 
 ![img](/doc/html/helix4.gif "Ribbon")
 ![img](/doc/html/shear.gif "Shearing")
