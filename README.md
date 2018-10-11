@@ -17,32 +17,32 @@ extruded surfaces, including surfaces of revolution,
 sweeps, tubes, polycones, polycylinders and helicoids.
 Generically, the extruded surface is specified with a
 2D polyline that is extruded along a 3D path.  A local
-coordinate system allows for additional flexibility in 
+coordinate system allows for additional flexibility in
 the primitives drawn.  Extrusions may be texture mapped
-in a variety of ways.  The GLE library generates 3D 
-triangle coordinates, lighting normal vectors and 
-texture coordinates as output. GLE uses the GL or 
+in a variety of ways.  The GLE library generates 3D
+triangle coordinates, lighting normal vectors and
+texture coordinates as output. GLE uses the GL or
 OpenGL(R) API's to perform the actual rendering.
 The demos use GLUT and require GLUT to be installed.
 
-![img](https://github.com/linas/glextrusion/raw/master/doc/html/basic.gif "Basic Cylinders")
-![img](https://github.com/linas/glextrusion/raw/master/doc/html/texscr.gif "Textured Screw")
-![img](https://github.com/linas/glextrusion/raw/master/doc/html/twist3.gif "Cut surface")
+![img](/doc/html/basic.gif "Basic Cylinders")
+![img](/doc/html/texscr.gif "Textured Screw")
+![img](/doc/html/twist3.gif "Cut surface")
 
 Obtaining OpenGL
 ----------------
 OpenGL is available on most UNIX(R) workstations,
 as well as OS/2(R) and Windows.  Contact your
 workstation vendor for more information; the URL
-http://www.opengl.org/ points to a variety of 
-information, including a list of OpenGL vendors. 
-GLE also works with Mesa, a public-domain 
-OpenGL-like API. Mesa can be found at 
+http://www.opengl.org/ points to a variety of
+information, including a list of OpenGL vendors.
+GLE also works with Mesa, a public-domain
+OpenGL-like API. Mesa can be found at
 http://www.mesa3d.org/
 
 Obtaining GLUT
 --------------
-The demos require that the GLUT windowing and 
+The demos require that the GLUT windowing and
 utility library be installed.  GLUT can be obtained
 at http://reality.sgi.com/mjk_asd/glut3/glut3.html
 
@@ -58,32 +58,30 @@ If you want to compile from source, you will need this:
 apt-get install libgl1-mesa-dev libxmu-dev libxi-dev freeglut3-dev
 ```
 
-![img](https://github.com/linas/glextrusion/raw/master/doc/html/helix2.gif "Helix")
-![img](https://github.com/linas/glextrusion/raw/master/doc/html/helixtex.gif "Textured Helix")
+![img](/doc/html/helix2.gif "Helix")
+![img](/doc/html/helixtex.gif "Textured Helix")
 
 Compiling
 ---------
 GLE uses the standard GNU automake/autoconf build process,
-and thus should be portable to essentially all computing 
-platforms.  At the command line simply type 'configure'
+and thus should be portable to essentially all computing
+platforms.  At the command line simply type `./configure`
 to set things up for your CPU & operating system.  Then run
-'make' to compile. Finally, cd to the examples directory, 
-and run the script 'rundemo' to launch each of the demos 
-in order (from most basic, to advanced).  Use the left 
+`make` to compile. Finally, cd to the examples directory,
+and run the script `rundemo` to launch each of the demos
+in order (from most basic, to advanced).  Use the left
 mouse button to move, the middle mouse button to access
-the pop-down menu. 
+the pop-down menu.
 
-If 'configure' fails, its probably because some library
+If `configure` fails, its probably because some library
 or another is missing.  Look at the file 'config.log'
 to see what actually went wrong.  In particular, pay
-attention to the short program at the end: trying to 
+attention to the short program at the end: trying to
 compile it by hand will give you a good idea on why
 it failed.
 
-configure flags:
-```
---enable-lenient-tess
-```
+Flags that can be supplied to `./configure`:
+`--enable-lenient-tess`
 If you have a tesselator that is happy with anything,
 including degenerate points, colinear segments, etc.
 then define this. Otherwise, don't specify this flag.
@@ -97,30 +95,25 @@ Early versions of the MesaGL tesselator are not at all
 forgiving of degenerate points.  This resulted in frequent
 crashes and/or hangs.  (circa 1997-2000). Recent versions
 (as of 2001) seem to work fine.  If you have an old version
- of MesaGL, do not set  <tt>--enable-lenient-tess</tt>
+ of MesaGL, do not set  `--enable-lenient-tess`
 
-```
---disable-auto-texture
-```
+`--disable-auto-texture`
 Disable texture mapping code.  Disabling texture
 mapping may provide a very minor performance improvement.
 
-```
---enable-irisgl
-```
+`--enable-irisgl`
 Compile for old IrisGL/GL-3.2 API.  This used to work, but
 hasn't been tested in a long time.
 
-```
---enable-debug
-```
+`--enable-debug`
 Will compile sources so printf routines will be called instead
 of OpenGL routines.  Warning: this will generate a *lot* of
 output!
 
 
 More information about building, as well as this package,
-can be found in the directory [doc](doc/html).
+can be found in the
+[doc](https://github.com/linas/glextrusion/raw/master/doc/html/index.html) directory.
 
 ![img](/doc/html/helix4.gif "Ribbon")
 ![img](/doc/html/shear.gif "Shearing")
