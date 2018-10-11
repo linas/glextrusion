@@ -81,41 +81,49 @@ compile it by hand will give you a good idea on why
 it failed.
 
 configure flags:
+```
 --enable-lenient-tess
-	If you have a tesselator that is happy with anything,
-	including degenerate points, colinear segments, etc.
-	then define this. Otherwise, don't specify this flag.
-        Setting this flag provides a minor performance improvement.
+```
+If you have a tesselator that is happy with anything,
+including degenerate points, colinear segments, etc.
+then define this. Otherwise, don't specify this flag.
+Setting this flag provides a minor performance improvement.
 	
-	I beleive that the stock SGI tesselator is "lenient",
-	despite explicit disclaimers in the documentation.
-	(circa 1995).  
+I beleive that the stock SGI tesselator is "lenient",
+despite explicit disclaimers in the documentation.
+(circa 1995).
 	
-        Early versions of the MesaGL tesselator are not at all 
-        forgiving of degenerate points.  This resulted in frequent 
-        crashes and/or hangs.  (circa 1997-2000). Recent versions
-        (as of 2001) seem to work fine.  If you have an old version
-        of MesaGL, do not set  <tt>--enable-lenient-tess</tt>
+Early versions of the MesaGL tesselator are not at all
+forgiving of degenerate points.  This resulted in frequent
+crashes and/or hangs.  (circa 1997-2000). Recent versions
+(as of 2001) seem to work fine.  If you have an old version
+ of MesaGL, do not set  <tt>--enable-lenient-tess</tt>
 
+```
 --disable-auto-texture
-	Disable texture mapping code.  Disabling texture 
-	mapping may provide a very minor performance improvement.
+```
+Disable texture mapping code.  Disabling texture
+mapping may provide a very minor performance improvement.
 
+```
 --enable-irisgl
-        Compile for old IrisGL/GL-3.2 API.  This used to work, but
-        hasn't been tested in a long time.
+```
+Compile for old IrisGL/GL-3.2 API.  This used to work, but
+hasn't been tested in a long time.
 
+```
 --enable-debug
-	Will compile sources so printf routines will be called instead
-        of OpenGL routines.  Warning: this will generate a *lot* of
-        output!
+```
+Will compile sources so printf routines will be called instead
+of OpenGL routines.  Warning: this will generate a *lot* of
+output!
 
 
-More information about building, as well as this package, 
-can be found in the directory "public_html".
+More information about building, as well as this package,
+can be found in the directory [doc](doc/html).
 
-![img](https://github.com/linas/glextrusion/raw/master/doc/html/helix4.gif "Ribbon")
-![img](https://github.com/linas/glextrusion/raw/master/doc/html/shear.gif "Shearing")
+![img](/doc/html/helix4.gif "Ribbon")
+![img](/doc/html/shear.gif "Shearing")
 
 RedHat RPM's
 ------------
@@ -124,7 +132,7 @@ RedHat RPM's can be built using the gle.spec file.
 
 Python, SWIG
 ------------
-Python bindings for gle can be found in the /swig directory.
+Python bindings for gle can be found in the [/swig](swig) directory.
 Be sure to read the readme.
 
 Compiling for Windows
@@ -144,5 +152,5 @@ files in the directory ms-visual-c that should do the same thing.
 Running
 -------
 Some of the example programs will hang or crash when run on
-older versions of MesaGL/Linux.  This is due to bugs in the 
+older versions of MesaGL/Linux.  This is due to bugs in the
 MesaGL tesellator.  Newer versions should work fine.
