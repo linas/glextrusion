@@ -25,6 +25,10 @@ texture coordinates as output. GLE uses the GL or
 OpenGL(R) API's to perform the actual rendering.
 The demos use GLUT and require GLUT to be installed.
 
+![img](https://github.com/linas/glextrusion/raw/master/doc/html/basic.gif "Basic Cylinders")
+![img](https://github.com/linas/glextrusion/raw/master/doc/html/texscr.gif "Textured Screw")
+![img](https://github.com/linas/glextrusion/raw/master/doc/html/twist3.gif "Cut surface")
+
 Obtaining OpenGL
 ----------------
 OpenGL is available on most UNIX(R) workstations,
@@ -53,6 +57,9 @@ If you want to compile from source, you will need this:
 ```
 apt-get install libgl1-mesa-dev libxmu-dev libxi-dev freeglut3-dev
 ```
+
+![img](https://github.com/linas/glextrusion/raw/master/doc/html/helix2.gif "Helix")
+![img](https://github.com/linas/glextrusion/raw/master/doc/html/helixtex.gif "Textured Helix")
 
 Compiling
 ---------
@@ -107,6 +114,8 @@ configure flags:
 More information about building, as well as this package, 
 can be found in the directory "public_html".
 
+![img](https://github.com/linas/glextrusion/raw/master/doc/html/helix4.gif "Ribbon")
+![img](https://github.com/linas/glextrusion/raw/master/doc/html/shear.gif "Shearing")
 
 RedHat RPM's
 ------------
