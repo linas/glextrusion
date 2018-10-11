@@ -3,7 +3,9 @@
 GLE - The GL Extrusion Library
 ==============================
 This is an update to the very old GLE library, still available
-[here](https://www.linas.org/gle/).
+[here, at the old website](https://www.linas.org/gle/).
+The original website is mirrored here, in the
+[doc/html](/doc/html/) directory.
 
 This update is a snapshot of the final version 3.1.0 of the codebase,
 and includes work from Dave Richards, providing a MSWindows-friendly
@@ -112,9 +114,10 @@ of OpenGL routines.  Warning: this will generate a *lot* of
 output!
 
 
+### Website Mirror
 More information about building, as well as this package,
-can be found in the
-[doc](https://github.com/linas/glextrusion/master/doc/html/index.html) directory.
+can be found in the mirror of the original website, in the
+[doc/html](https://github.com/linas/glextrusion/tree/master/doc/html/) directory.
 
 ![img](/doc/html/helix4.gif "Ribbon")
 ![img](/doc/html/shear.gif "Shearing")
@@ -140,7 +143,7 @@ lib -out:gle.lib *.obj
 ```
 
 Alternately, there are a set of Microsoft Visual Studio Project
-files in the directory ms-visual-c that should do the same thing.
+files in the directory [ms-visual-c](ms-visual-c) that should do the same thing.
 
 
 Running
