@@ -28,7 +28,7 @@ The demos use GLUT and require GLUT to be installed.
 Obtaining OpenGL
 ----------------
 OpenGL is available on most UNIX(R) workstations,
-as well as OS/2(R) and Windows NT.  Contact your
+as well as OS/2(R) and Windows.  Contact your
 workstation vendor for more information; the URL
 http://www.opengl.org/ points to a variety of 
 information, including a list of OpenGL vendors. 
@@ -118,15 +118,17 @@ Python, SWIG
 Python bindings for gle can be found in the /swig directory.
 Be sure to read the readme.
 
-Compiling for Windows NT
+Compiling for Windows
 ------------------------
 To compile with Visual C++, just do the following:
 
+```
 cd src
-cl -c -DWIN32  *.c
-lib -out:libgle.lib *.obj
+cl -c -DWIN32 -DOPENGL_10=1 *.c
+lib -out:gle.lib *.obj
+```
 
-Alternately, there are a set of Microsoft Visual C Studio Project
+Alternately, there are a set of Microsoft Visual Studio Project
 files in the directory ms-visual-c that should do the same thing.
 
 

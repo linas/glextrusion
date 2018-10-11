@@ -43,8 +43,8 @@ RSC=rc.exe
 # PROP Target_Dir ""
 # ADD BASE F90 /compile_only /nologo /warn:nofileopt
 # ADD F90 /compile_only /nologo /warn:nofileopt
-# ADD BASE CPP /nologo /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_MBCS" /D "_LIB" /YX /FD /c
-# ADD CPP /nologo /MD /W3 /GX /O2 /I "." /D "WIN32" /D "NDEBUG" /D "_MBCS" /D "_LIB" /FD /c
+# ADD BASE CPP /nologo /W3 /GX /O2 /D "WIN32" /D "OPENGL_10=1" /D "NDEBUG" /D "_MBCS" /D "_LIB" /YX /FD /c
+# ADD CPP /nologo /MD /W3 /GX /O2 /I "." /I "../../src/GL" /D "WIN32" /D "OPENGL_10=1" /D "NDEBUG" /D "_MBCS" /D "_LIB" /FD /c
 # SUBTRACT CPP /YX
 # ADD BASE RSC /l 0x41d /d "NDEBUG"
 # ADD RSC /l 0x41d /d "NDEBUG"
@@ -56,7 +56,7 @@ LIB32=link.exe -lib
 # ADD LIB32 /nologo /out:"..\lib\gle.lib"
 # Begin Special Build Tool
 SOURCE="$(InputPath)"
-PostBuild_Cmds=md ..\include	md ..\include\GL	copy ..\..\src\gle.h ..\include\GL
+PostBuild_Cmds=md ..\include	md ..\include\GL	copy ..\..\src\GL\gle.h ..\include\GL
 # End Special Build Tool
 
 !ELSEIF  "$(CFG)" == "gle - Win32 Debug"
@@ -73,8 +73,8 @@ PostBuild_Cmds=md ..\include	md ..\include\GL	copy ..\..\src\gle.h ..\include\GL
 # PROP Target_Dir ""
 # ADD BASE F90 /check:bounds /compile_only /debug:full /nologo /traceback /warn:argument_checking /warn:nofileopt
 # ADD F90 /check:bounds /compile_only /debug:full /nologo /traceback /warn:argument_checking /warn:nofileopt
-# ADD BASE CPP /nologo /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_MBCS" /D "_LIB" /YX /FD /GZ /c
-# ADD CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /I "." /D "WIN32" /D "_DEBUG" /D "_MBCS" /D "_LIB" /FD /GZ /c
+# ADD BASE CPP /nologo /W3 /Gm /GX /ZI /Od /D "WIN32" /D "OPENGL_10=1" /D "_DEBUG" /D "_MBCS" /D "_LIB" /YX /FD /GZ /c
+# ADD CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /I "." /I "../../src/GL" /D "WIN32" /D "OPENGL_10=1" /D "_DEBUG" /D "_MBCS" /D "_LIB" /FD /GZ /c
 # SUBTRACT CPP /YX
 # ADD BASE RSC /l 0x41d /d "_DEBUG"
 # ADD RSC /l 0x41d /d "_DEBUG"
@@ -86,7 +86,7 @@ LIB32=link.exe -lib
 # ADD LIB32 /nologo /out:"..\lib\gled.lib"
 # Begin Special Build Tool
 SOURCE="$(InputPath)"
-PostBuild_Cmds=md ..\include	md ..\include\GL	copy ..\..\src\gle.h ..\include\GL
+PostBuild_Cmds=md ..\include	md ..\include\GL	copy ..\..\src\GL\gle.h ..\include\GL
 # End Special Build Tool
 
 !ENDIF 
@@ -98,6 +98,10 @@ PostBuild_Cmds=md ..\include	md ..\include\GL	copy ..\..\src\gle.h ..\include\GL
 # Begin Group "Source Files"
 
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
+# Begin Source File
+
+SOURCE=..\..\src\ex_alpha.c
+# End Source File
 # Begin Source File
 
 SOURCE=..\..\src\ex_angle.c
@@ -164,7 +168,7 @@ SOURCE=..\..\src\extrude.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\src\gle.h
+SOURCE=..\..\src\GL\gle.h
 # End Source File
 # Begin Source File
 
