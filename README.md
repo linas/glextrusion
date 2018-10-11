@@ -2,9 +2,9 @@
 
 GLE - The GL Extrusion Library
 ==============================
-This is an update to the very old GLE library, still available
-[here, at the old website](https://www.linas.org/gle/).
-The original website is mirrored here, in the
+This git repo contains an update to the very old (1991-2001) GLE library,
+which is still available [from the old website](https://www.linas.org/gle/).
+That original website is mirrored here, in the
 [doc/html](/doc/html/) directory.
 
 This update is a snapshot of the final version 3.1.0 of the codebase,
@@ -33,23 +33,17 @@ The demos use GLUT and require GLUT to be installed.
 
 Obtaining OpenGL
 ----------------
-OpenGL is available on most UNIX(R) workstations,
-as well as OS/2(R) and Windows.  Contact your
-workstation vendor for more information; the URL
-http://www.opengl.org/ points to a variety of
-information, including a list of OpenGL vendors.
-GLE also works with Mesa, a public-domain
-OpenGL-like API. Mesa can be found at
-http://www.mesa3d.org/
+OpenGL is available on UNIX, Linux, Mac and Windows.
+Find more about OpenGL at https://www.opengl.org/
 
 Obtaining GLUT
 --------------
 The demos require that the GLUT windowing and
-utility library be installed.  GLUT can be obtained
-at http://reality.sgi.com/mjk_asd/glut3/glut3.html
+utility library be installed.  Most OpenGL distributions
+come with GLUT (I think).
 
-On Debian
----------
+On Linux/Debian
+---------------
 On modern Linux systems, skip the above, and instead, just say:
 ```
 sudo apt-get install libgle3-dev
@@ -89,16 +83,13 @@ If you have a tesselator that is happy with anything,
 including degenerate points, colinear segments, etc.
 then define this. Otherwise, don't specify this flag.
 Setting this flag provides a minor performance improvement.
-	
 I beleive that the stock SGI tesselator is "lenient",
 despite explicit disclaimers in the documentation.
 (circa 1995).
-	
 Early versions of the MesaGL tesselator are not at all
 forgiving of degenerate points.  This resulted in frequent
 crashes and/or hangs.  (circa 1997-2000). Recent versions
-(as of 2001) seem to work fine.  If you have an old version
- of MesaGL, do not set  `--enable-lenient-tess`
+(as of 2001) seem to work fine.
 
 `--disable-auto-texture`
 Disable texture mapping code.  Disabling texture
@@ -124,7 +115,7 @@ can be found in the mirror of the original website, in the
 
 RedHat RPM's
 ------------
-RedHat RPM's can be built using the gle.spec file.
+RedHat RPM's can be built using the `gle.spec` file.
 
 
 Python, SWIG
@@ -149,5 +140,5 @@ files in the directory [ms-visual-c](ms-visual-c) that should do the same thing.
 Running
 -------
 Some of the example programs will hang or crash when run on
-older versions of MesaGL/Linux.  This is due to bugs in the
+older (pre-2001) versions of MesaGL/Linux.  This was due to bugs in the
 MesaGL tesellator.  Newer versions should work fine.
