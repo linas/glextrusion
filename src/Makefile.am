@@ -22,6 +22,7 @@ libgle_la_SOURCES = 	\
 
 
 libgle_la_LDFLAGS = -version-info 4:0:1
+libgle_la_LIBADD = @X_LIBS@
 
 # Make sure we install gle.h into /usr/include/GL/gle.h or thereabouts
 pkgincludedir = $(includedir)/GL
