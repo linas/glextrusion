@@ -209,7 +209,7 @@ iterate_reaction_texture (int reset)
 {
    int i,j, im1, ip1, jm1, jp1; 
    int iter;
-   char * pixmap;
+   unsigned char * pixmap;
    float tmp;
    float cpmax, cpmin, cmmax, cmmin, cps, cms;
    float cpr, cmr;
