@@ -56,7 +56,7 @@ AM_CPPFLAGS = \
   -I${top_srcdir} \
   -I${top_srcdir}/src 
 
-LDADD = @X_LIBS@  -L../src/
+LDADD = -lgle @X_LIBS@  -L../src/
 
 docdir = $(datadir)/doc/gle/examples
 

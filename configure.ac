@@ -138,7 +138,7 @@ AC_CHECK_LIB(glut, glutSwapBuffers,
 #       cc @X_LIBS@ (-lfoo...) @X_PRE_LIBS@ -lX11 @X_EXTRA_LIBS@
 # (Perhaps X_LIBS should have been called X_LDFLAGS.)
 
-X_LIBS="-lgle $X_LIBS -lXt -lX11"
+X_LIBS="$X_LIBS -lXt -lX11"
 
 AC_OUTPUT(
           Makefile
