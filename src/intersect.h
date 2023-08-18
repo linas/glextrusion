@@ -80,11 +80,15 @@
  * than -5), then we assume that t was positive and wound through
  * infinity.  This makes most cuts look good, without introducing bogus
  * cuts at infinity.
+ *
+ * The `valid` flag is set correctly, but its commented out because the
+ * return value is never checked (giving compiler warnings).
  */
 /* ========================================================== */
 
-#define INTERSECT(valid,sect,p,n,v1,v2)			\
+#define INTERSECT(sect,p,n,v1,v2)			\
 {							\
+   /* int valid = TRUE; */				\
    gleDouble deno, numer, t, omt;			\
 							\
    deno = (v1[0] - v2[0]) * n[0];			\
@@ -92,12 +96,11 @@
    deno += (v1[2] - v2[2]) * n[2];			\
    							\
    if (deno == 0.0) {					\
-      valid = FALSE;					\
+      /* valid = FALSE; */				\
       VEC_COPY (n, v1);					\
       /* printf ("Intersect: Warning: line is coplanar with plane \n"); */ \
    } else {						\
 							\
-      valid = TRUE;					\
       numer = (p[0] - v2[0]) * n[0];			\
       numer += (p[1] - v2[1]) * n[1];			\
       numer += (p[2] - v2[2]) * n[2];			\
@@ -108,13 +111,14 @@
       /* if (t < -5.0) valid = 2; HACK ALERT See above */	\
 							\
       /* if t is HUGE, then plane and line are almost co-planar */ \
-      if ((1.0 < t * DEGENERATE_TOLERANCE) ||		\
-         (-1.0 > t * DEGENERATE_TOLERANCE)) valid = FALSE;	\
+      /* if ((1.0 < t * DEGENERATE_TOLERANCE) || */		\
+      /*    (-1.0 > t * DEGENERATE_TOLERANCE)) valid = FALSE; */	\
 							\
       sect[0] = t * v1[0] + omt * v2[0];		\
       sect[1] = t * v1[1] + omt * v2[1];		\
       sect[2] = t * v1[2] + omt * v2[2];		\
    }							\
+	/* valid; */					\
 }
 
 /* ========================================================== */

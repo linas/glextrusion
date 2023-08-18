@@ -32,10 +32,8 @@ int intersect (gleDouble sect[3],	/* returned */
                 gleDouble v1[3],	/* input */
                 gleDouble v2[3])	/* input */
 {
-   int valid;
-
-   INTERSECT (valid, sect, p, n, v1, v2);
-   return (valid);
+   INTERSECT (sect, p, n, v1, v2);
+	return TRUE; /* XXX should return `valid` from macro */;
 }
 
 /* ========================================================== */
