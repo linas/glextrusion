@@ -402,7 +402,7 @@ static void draw_fillets_and_join_plain
    int save_style = 0;
    int was_trimmed = FALSE;
 
-   cap_loop = (double *) malloc ((ncp+3)*3*sizeof (double));
+   cap_loop = (double *) malloc (((size_t)ncp+3)*3*sizeof (double));
    
    /*
     * If the first point is trimmed, keep going until one
@@ -619,7 +619,7 @@ draw_fillets_and_join_n_norms
    int was_trimmed = FALSE;
 
    save_style = gleGetJoinStyle ();
-   cap_loop = (double *) malloc ((ncp+3)*3*2*sizeof (double));
+   cap_loop = (double *) malloc (((size_t)ncp+3)*3*2*sizeof (double));
    norm_loop = cap_loop + (ncp+3)*3;
    
    /* 
@@ -910,9 +910,9 @@ extrusion_round_or_cut_join (int ncp,	/* number of contour points */
    neg_z[2] = 1.0;
 
    /* malloc the data areas that we'll need to store the end-caps */
-   mem_anchor = malloc (4 * 3*ncp*sizeof(gleDouble)
-                      + 2 * 3*ncp*sizeof(double)
-                      + 2 * 1*ncp*sizeof(int));
+   mem_anchor = malloc (4 * 3*(size_t)ncp*sizeof(gleDouble)
+                      + 2 * 3*(size_t)ncp*sizeof(double)
+                      + 2 * 1*(size_t)ncp*sizeof(int));
    front_norm = (double *) mem_anchor;
    back_norm = front_norm + 3*ncp;
    front_loop = (gleDouble *) (back_norm + 3*ncp);
