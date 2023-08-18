@@ -97,6 +97,7 @@
    							\
    if (deno == 0.0) {					\
       /* valid = FALSE; */				\
+      VEC_ZERO (sect);					\
       VEC_COPY (n, v1);					\
       /* printf ("Intersect: Warning: line is coplanar with plane \n"); */ \
    } else {						\
