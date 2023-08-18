@@ -113,9 +113,9 @@ void draw_angle_style_front_cap (int ncp,	/* number of contour points */
    N3F(bi);
 
    tobj = gluNewTess ();
-   gluTessCallback (tobj, GLU_BEGIN, glBegin);
-   gluTessCallback (tobj, GLU_VERTEX, glVertex3dv);
-   gluTessCallback (tobj, GLU_END, glEnd);
+   gluTessCallback (tobj, GLU_BEGIN, (_GLUfuncptr)glBegin);
+   gluTessCallback (tobj, GLU_VERTEX, (_GLUfuncptr)glVertex3dv);
+   gluTessCallback (tobj, GLU_END, (_GLUfuncptr)glEnd);
 
 #ifdef LENIENT_TESSELATOR 
    gluBeginPolygon (tobj);
@@ -192,9 +192,9 @@ void draw_angle_style_back_cap (int ncp,	/* number of contour points */
    N3F (bi);
 
    tobj = gluNewTess ();
-   gluTessCallback (tobj, GLU_BEGIN, glBegin);
-   gluTessCallback (tobj, GLU_VERTEX, glVertex3dv);
-   gluTessCallback (tobj, GLU_END, glEnd);
+   gluTessCallback (tobj, GLU_BEGIN, (_GLUfuncptr)glBegin);
+   gluTessCallback (tobj, GLU_VERTEX, (_GLUfuncptr)glVertex3dv);
+   gluTessCallback (tobj, GLU_END, (_GLUfuncptr)glEnd);
 
 #ifdef LENIENT_TESSELATOR 
    gluBeginPolygon (tobj);

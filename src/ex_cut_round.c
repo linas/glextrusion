@@ -134,9 +134,9 @@ draw_cut_style_cap_callback (int iloop,
 #ifdef OPENGL_10
    GLUtriangulatorObj *tobj;
    tobj = gluNewTess ();
-   gluTessCallback (tobj, GLU_BEGIN, glBegin);
-   gluTessCallback (tobj, GLU_VERTEX, glVertex3dv);
-   gluTessCallback (tobj, GLU_END, glEnd);
+   gluTessCallback (tobj, GLU_BEGIN, (_GLUfuncptr) glBegin);
+   gluTessCallback (tobj, GLU_VERTEX, (_GLUfuncptr) glVertex3dv);
+   gluTessCallback (tobj, GLU_END, (_GLUfuncptr) glEnd);
 #endif /* OPENGL_10 */
 
    if (face_color != NULL) C3F (face_color);
