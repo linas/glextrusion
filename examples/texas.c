@@ -202,7 +202,7 @@ void DrawStuff (void) {
    lmcolor (LMC_COLOR);
 #endif
 
-#define OPENGL_10
+// #define OPENGL_10
 #ifdef OPENGL_10
    glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 

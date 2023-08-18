@@ -205,7 +205,7 @@ void glePolyCone (int npoints,
    int j;
 
    /* build 2D affine matrices from radius array */
-   xforms = (gleAffine *) malloc (npoints * sizeof(gleAffine));
+   xforms = (gleAffine *) malloc ((size_t)npoints * sizeof(gleAffine));
    for (j=0; j<npoints; j++) {
       AVAL(xforms,j,0,0) = radius_array[j];
       AVAL(xforms,j,0,1) = 0.0;
@@ -239,7 +239,7 @@ void gleTwistExtrusion (int ncp,         /* number of contour points */
    gleAffine *xforms;
 
    /* build 2D affine matrices from radius array */
-   xforms = (gleAffine *) malloc (npoints * sizeof(gleAffine));
+   xforms = (gleAffine *) malloc ((size_t)npoints * sizeof(gleAffine));
 
    for (j=0; j<npoints; j++) {
       angle = (M_PI/180.0) * twist_array[j];
@@ -321,11 +321,11 @@ void gleSpiral (int ncp,               /* number of contour points */
    npoints = (int) ((((double) __TESS_SLICES) /360.0) * fabs(sweepTheta)) + 4;
 
    if (startXform == NULL) {
-      mem_anchor = malloc (3*npoints * sizeof (gleDouble));
+      mem_anchor = malloc (3*(size_t)npoints * sizeof (gleDouble));
       pts = (gleDouble *) mem_anchor;
       xforms = NULL;
    } else {
-      mem_anchor = malloc ((1+2)* 3*npoints * sizeof (gleDouble));
+      mem_anchor = malloc ((1+2)* 3*(size_t)npoints * sizeof (gleDouble));
       pts = (gleDouble *) mem_anchor;
       xforms = (gleAffine *) (pts + 3*npoints);
    }
@@ -741,8 +741,8 @@ void gleScrew (int ncp,
    numsegs = (int) fabs (twist / 18.0) + 4;
 
    /* malloc the extrusion array and the twist array */
-   path = (gleVector *) malloc (numsegs * sizeof (gleVector));
-   twarr = (gleDouble *) malloc (numsegs * sizeof (gleDouble));
+   path = (gleVector *) malloc ((size_t)numsegs * sizeof (gleVector));
+   twarr = (gleDouble *) malloc ((size_t)numsegs * sizeof (gleDouble));
 
    /* fill in the extrusion array and the twist array uniformly */
    delta = (endz-startz) / ((gleDouble) (numsegs-3));

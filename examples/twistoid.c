@@ -20,7 +20,7 @@
 #include <GL/gle.h>
 #include "main.h"
 
-#define OPENGL_10
+// #define OPENGL_10
 /* =========================================================== */
 
 #define NUM_TOID1_PTS 5
@@ -95,8 +95,8 @@ static void init_toid1_line (void)
 
 #define NUM_TWIS_PTS (20)
 
-double twistation [NUM_TWIS_PTS][2];
-double twist_normal [NUM_TWIS_PTS][2];
+double twistation [NUM_TWIS_PTS+1][2];
+double twist_normal [NUM_TWIS_PTS+1][2];
 
 static void init_tripples (void)
 {

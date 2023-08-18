@@ -149,11 +149,11 @@ void draw_raw_style_end_cap (int ncp,		/* number of contour points */
 
 #ifdef OPENGL_10
    /* malloc the @#$%^&* array that OpenGL wants ! */
-   pts = (double *) malloc (3*ncp*sizeof(double));
+   pts = (double *) malloc (3*(size_t)ncp*sizeof(double));
    tobj = gluNewTess ();
-   gluTessCallback (tobj, GLU_BEGIN, glBegin);
-   gluTessCallback (tobj, GLU_VERTEX, glVertex3dv);
-   gluTessCallback (tobj, GLU_END, glEnd);
+   gluTessCallback (tobj, GLU_BEGIN, (_GLUfuncptr)glBegin);
+   gluTessCallback (tobj, GLU_VERTEX, (_GLUfuncptr)glVertex3dv);
+   gluTessCallback (tobj, GLU_END, (_GLUfuncptr)glEnd);
    gluBeginPolygon (tobj);
 
       /* draw the loop counter clockwise for the front cap */
@@ -211,9 +211,9 @@ draw_front_contour_cap (int ncp,	/* number of contour points */
 
 #ifdef OPENGL_10
    tobj = gluNewTess ();
-   gluTessCallback (tobj, GLU_BEGIN, glBegin);
-   gluTessCallback (tobj, GLU_VERTEX, glVertex3dv);
-   gluTessCallback (tobj, GLU_END, glEnd);
+   gluTessCallback (tobj, GLU_BEGIN, (_GLUfuncptr)glBegin);
+   gluTessCallback (tobj, GLU_VERTEX, (_GLUfuncptr)glVertex3dv);
+   gluTessCallback (tobj, GLU_END, (_GLUfuncptr)glEnd);
    gluBeginPolygon (tobj);
 
    for (j=0; j<ncp; j++) {
@@ -257,9 +257,9 @@ draw_back_contour_cap (int ncp,	/* number of contour points */
 
 #ifdef OPENGL_10
    tobj = gluNewTess ();
-   gluTessCallback (tobj, GLU_BEGIN, glBegin);
-   gluTessCallback (tobj, GLU_VERTEX, glVertex3dv);
-   gluTessCallback (tobj, GLU_END, glEnd);
+   gluTessCallback (tobj, GLU_BEGIN, (_GLUfuncptr)glBegin);
+   gluTessCallback (tobj, GLU_VERTEX, (_GLUfuncptr)glVertex3dv);
+   gluTessCallback (tobj, GLU_END, (_GLUfuncptr)glEnd);
    gluBeginPolygon (tobj);
 
    /* draw the end cap */
@@ -788,7 +788,7 @@ void extrusion_raw_join (int ncp,		/* number of contour points */
 
    /* alloc loop arrays if needed */
    if (! no_xform) {
-      mem_anchor = malloc (4 * ncp * 3 * sizeof(gleDouble));
+      mem_anchor = malloc (4 * (size_t)ncp * 3 * sizeof(gleDouble));
       front_loop = (gleDouble *) mem_anchor;
       back_loop = front_loop + 3*ncp;
       front_norm = back_loop + 3*ncp;

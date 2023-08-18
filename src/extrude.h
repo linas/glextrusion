@@ -22,7 +22,7 @@
 
 #define INLINE_INTERSECT
 #ifdef INLINE_INTERSECT
-#define INNERSECT(sect,p,n,v1,v2) { int retval; INTERSECT(retval,sect,p,n,v1,v2); }
+#define INNERSECT(sect,p,n,v1,v2) INTERSECT(sect,p,n,v1,v2)
 #else
 #define INNERSECT(sect,p,n,v1,v2) intersect(sect,p,n,v1,v2)
 #endif /* INLINE_INTERSECT */

@@ -24,6 +24,7 @@ void urotx_cs (gleDouble m[4][4], 	/* returned */
 
 /* ========================================================== */
 
+#ifdef UNUSED_SIGNED_VERSION
 static 
 void rotx_cs (gleDouble cosine,		/* input */
                 gleDouble sine) 	/* input */
@@ -34,6 +35,7 @@ void rotx_cs (gleDouble cosine,		/* input */
    urotx_cs (m, cosine, sine);
    MULTMATRIX (m);
 }
+#endif /* UNUSED_SIGNED_VERSION */
 
 /* ========================================================== */
 
@@ -49,6 +51,7 @@ void uroty_cs (gleDouble m[4][4], 	/* returned */
 
 /* ========================================================== */
 
+#ifdef UNUSED_SIGNED_VERSION
 static 
 void roty_cs (gleDouble cosine,		/* input */
                 gleDouble sine) 	/* input */
@@ -59,6 +62,7 @@ void roty_cs (gleDouble cosine,		/* input */
    uroty_cs (m, cosine, sine);
    MULTMATRIX (m);
 }
+#endif /* UNUSED_SIGNED_VERSION */
 
 /* ========================================================== */
 
@@ -73,6 +77,7 @@ void urotz_cs (gleDouble m[4][4], 	/* returned */
 
 /* ========================================================== */
 
+#ifdef UNUSED_SIGNED_VERSION
 static 
 void rotz_cs (gleDouble cosine,		/* input */
               gleDouble sine) 		/* input */
@@ -83,6 +88,7 @@ void rotz_cs (gleDouble cosine,		/* input */
    urotz_cs (m, cosine, sine);
    MULTMATRIX (m);
 }
+#endif /* UNUSED_SIGNED_VERSION */
 
 /* ========================================================== */
 
@@ -115,6 +121,7 @@ void urot_cs (gleDouble m[4][4],	/* returned */
 
 /* ========================================================== */
 
+#ifdef UNUSED_SIGNED_VERSION
 static 
 void rot_cs (gleDouble cosine,		/* input */
              gleDouble sine,		/* input */
@@ -126,6 +133,7 @@ void rot_cs (gleDouble cosine,		/* input */
    urot_cs (m, cosine, sine, axis);
    MULTMATRIX (m);
 }
+#endif /* UNUSED_SIGNED_VERSION */
 
 /* ========================================================== */
 

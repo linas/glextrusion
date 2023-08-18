@@ -98,7 +98,7 @@ setup_circle (gleGC *gc, int nslices)
 
    if (nslices > gc->slices) {
       gc->circle = (gleTwoVec *) realloc (gc->circle, 
-                                          sizeof(gleTwoVec)*2*nslices);
+                                          sizeof(gleTwoVec)*2*(size_t)nslices);
       gc->norm = &(gc->circle)[nslices];
    }
 

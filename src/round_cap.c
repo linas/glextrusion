@@ -110,7 +110,7 @@ void draw_round_style_cap_callback (int ncp,
     * last_contour = (double *) malloc (3*ncp*sizeof(double);
     * next_contour = (double *) malloc (3*ncp*sizeof(double);
     */
-   malloced_area = malloc ((4*3+1) *ncp*sizeof (double));
+   malloced_area = malloc ((4*3+1) *(size_t)ncp*sizeof (double));
    last_contour = (double *) malloced_area;
    next_contour = last_contour +  3*ncp;
    cap_z = next_contour + 3*ncp;
