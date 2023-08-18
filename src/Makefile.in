@@ -256,6 +256,7 @@ LDFLAGS = @LDFLAGS@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LIBTOOL = @LIBTOOL@
+LIBVERINFO = @LIBVERINFO@
 LIPO = @LIPO@
 LN_S = @LN_S@
 LTLIBOBJS = @LTLIBOBJS@
@@ -360,7 +361,7 @@ libgle_la_SOURCES = \
   urotate.c		\
   view.c
 
-libgle_la_LDFLAGS = -version-info 4:0:1
+libgle_la_LDFLAGS = -version-info @LIBVERINFO@
 libgle_la_LIBADD = @X_LIBS@
 GLdir = $(includedir)/GL
 GL_DATA = GL/gle.h

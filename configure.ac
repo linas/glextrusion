@@ -23,7 +23,8 @@ dnl Process this file with autoreconf -vi to produce a configure script.
 ### check for various programs, and stuff (do this first because later
 ### commands depend on them):
 
-AC_INIT([glextrusion], 3.1.1, [], [gle], [https://github.com/linas/glextrusion])
+AC_INIT([glextrusion], 3.1.2, [], [gle], [https://github.com/linas/glextrusion])
+LIBVERINFO="4:2:1"
 AM_INIT_AUTOMAKE([foreign])
 
 AC_CONFIG_MACRO_DIR([m4])
@@ -140,6 +141,7 @@ AC_CHECK_LIB(glut, glutSwapBuffers,
 
 X_LIBS="$X_LIBS -lXt -lX11"
 
+AC_SUBST(LIBVERINFO)
 AC_OUTPUT(
           Makefile
           src/Makefile
