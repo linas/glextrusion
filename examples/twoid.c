@@ -23,7 +23,7 @@
 static int mx = 121;
 static int my = 121;
 
-#define OPENGL_10
+// #define OPENGL_10
 /* =========================================================== */
 
 #define NUM_TOID1_PTS 5

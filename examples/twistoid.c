@@ -20,7 +20,7 @@
 #include <GL/gle.h>
 #include "main.h"
 
-#define OPENGL_10
+// #define OPENGL_10
 /* =========================================================== */
 
 #define NUM_TOID1_PTS 5
